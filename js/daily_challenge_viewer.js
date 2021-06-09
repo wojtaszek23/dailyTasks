@@ -14,12 +14,36 @@ function next_date()
   dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
 };
 
+function next_date30days()
+{
+  var dateLabel = document.getElementById("show_date_p");
+  dateLabelArray = dateLabel.innerHTML.split(".");
+  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
+  date.setDate(date.getDate() + 30);
+  show_results(date);
+  show_targets(date);
+  var month = date.getMonth() + 1;
+  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
+};
+
 function previous_date()
 {
   var dateLabel = document.getElementById("show_date_p");
   dateLabelArray = dateLabel.innerHTML.split(".");
   var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
   date.setDate(date.getDate() - 1);
+  show_results(date);
+  show_targets(date);
+  var month = date.getMonth() + 1;
+  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
+};
+
+function previous_date30days()
+{
+  var dateLabel = document.getElementById("show_date_p");
+  dateLabelArray = dateLabel.innerHTML.split(".");
+  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
+  date.setDate(date.getDate() - 30);
   show_results(date);
   show_targets(date);
   var month = date.getMonth() + 1;
