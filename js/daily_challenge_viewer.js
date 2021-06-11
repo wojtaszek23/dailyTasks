@@ -101,7 +101,6 @@ function show_targets(date)
 
 function changeDone(value, id)
 {
-    console.log("enter changeDone function");
     var dateLabel = document.getElementById("show_date_p");
     dateLabelArray = dateLabel.innerHTML.split(".");
     var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
@@ -117,14 +116,12 @@ function changeDone(value, id)
         }
     }
 
-    console.log(res_id);
     var url = "change_result_done.php";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function()
     {
         if(this.readyState == 4 || this.status == 200) 
         {
-            //console.log("otrzymano odpowiedź: " + this.responseText);
             for(let res of results)
             {
                 var res_date = new Date(new Date(res.date).setHours(0)).getTime();

@@ -35,9 +35,22 @@
     throw new Exception(myslqi_connect_errno());
   }
 
+  $resultsName = $_SESSION['nick_logged']."_challange_results";
+  $targetsName = $_SESSION['nick_logged']."_challange";
+
+  $resultResults = $connection->query("SHOW TABLES LIKE '$resultsName'");
+  $resultTargets = $connection->query("SHOW TABLES LIKE '$targetsName'");
+
+  if ($resultResults->num_rows == 0 || $resultTargets->num_rows == 0)
+  {
+    $connection->close();
+    $_SESSION['header_text'] = "Wystąpił nieoczekiwany błąd podczas próby odnalezienia tabeli z zadaniami lub wynikami dla nicku '$nick', proszę o zgłoszenie problemu twórcy strony.";
+    exit();  
+  }
+
   $target_id="target_id_".$id;
 
-  $connection->query("UPDATE aaa1_challange_results SET $target_id=$value WHERE id=$res_id");
+  $connection->query("UPDATE $resultsName SET $target_id=$value WHERE id=$res_id");
   $connection->close();
 
   echo 'target_id_'.$id.'='.$value;
