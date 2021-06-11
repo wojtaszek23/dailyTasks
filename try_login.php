@@ -37,7 +37,7 @@
   $nick = htmlentities($nick, ENT_QUOTES, "UTF-8");
   
   //attach connection strings to Database
-  require_once "connection_strings.php";
+  require_once "../connection_strings.php";
   
   //create mysqli object and set connection strings throught constructor parameters,
   //that constructor opens a new connection with Database also

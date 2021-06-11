@@ -10,7 +10,7 @@
     exit();
   }
 
-  require_once "connection_strings.php";
+  require_once "../connection_strings.php";
   
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
  

@@ -2,7 +2,7 @@
   //open access to session variables
   session_start();
   //attach connection strings to Database
-  require_once "connection_strings.php";
+  require_once "../connection_strings.php";
   
   //exit if type of http request is other than get, only get is expected.
   //exit if there is no nick set in session or user is no logged in session also.
