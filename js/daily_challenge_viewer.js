@@ -2,7 +2,7 @@ window.onload = load;
 var targets = [];
 var results = [];
 
-function next_date()
+/*function next_date()
 {
   var dateLabel = document.getElementById("show_date_p");
   dateLabelArray = dateLabel.innerHTML.split(".");
@@ -12,43 +12,16 @@ function next_date()
   show_targets(date);
   var month = date.getMonth() + 1;
   dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
-};
+};*/
 
-function next_date30days()
+function date_changed()
 {
-  var dateLabel = document.getElementById("show_date_p");
-  dateLabelArray = dateLabel.innerHTML.split(".");
-  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
-  date.setDate(date.getDate() + 30);
-  show_results(date);
-  show_targets(date);
-  var month = date.getMonth() + 1;
-  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
-};
+    var date = document.getElementById("date").value;
+    console.log(date);
+    show_results(date);
+    show_targets(date);
+}
 
-function previous_date()
-{
-  var dateLabel = document.getElementById("show_date_p");
-  dateLabelArray = dateLabel.innerHTML.split(".");
-  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
-  date.setDate(date.getDate() - 1);
-  show_results(date);
-  show_targets(date);
-  var month = date.getMonth() + 1;
-  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
-};
-
-function previous_date30days()
-{
-  var dateLabel = document.getElementById("show_date_p");
-  dateLabelArray = dateLabel.innerHTML.split(".");
-  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
-  date.setDate(date.getDate() - 30);
-  show_results(date);
-  show_targets(date);
-  var month = date.getMonth() + 1;
-  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
-};
 
 function show_targets(date)
 {
@@ -196,11 +169,14 @@ function construct_results()
     results_table.innerHTML = txt;
 }
 
-function show_results(date)
+function show_results(date1)
 {    
     var results_table = document.getElementById("results_table");
     results_table.style.display = "none";
     var result_width_given_date_exsists = false;
+    console.log(date1);
+    var date = new Date(date1);
+    console.log(date);
     date = date.getTime();
     for(let result of results)
     {
@@ -242,10 +218,12 @@ function show_results(date)
                     {
                         var radio = document.getElementById(`results_table_radio_row_` + id + `_done`+j);
                         radio.checked = false;
+                        console.log("j: "+j);
                     }
                     var value = result['target_id_'+id];
                     radio = document.getElementById(`results_table_radio_row_` + id + `_done` + value);
                     radio.checked = true;
+                    console.log("id: "+id);
                 }
             }
         }
@@ -262,6 +240,8 @@ function show_statistics()
     var abc = document.getElementById("statistics_div");
     var i = 0;
     var percent = [];
+    console.log(targets);
+    console.log(results);
     
     for(let target of targets)
     {
@@ -276,8 +256,10 @@ function show_statistics()
             
             if(result_date >= provide_date && (result_date < remove_date || remove_date == 0))
             {
-                i=i+1;
                 if(scale!=0) percent[i] = result['target_id_'+id] / scale;
+                console.log("id: "+id+" "+percent[i]);
+                i=i+1;
+                //console.log(percent[i]);
             }
         }
     }
@@ -287,7 +269,9 @@ function show_statistics()
     {
         if(element!=undefined) sum = sum + element;
     }
-    
+    console.log("sum: " + sum);
+    console.log("percent.length: " + percent.length);
+    console.log("percent: " + percent);
     sum = 100* sum / percent.length;
     abc.innerHTML = "Całościowy dotychczasowy stopień realizacji zadań: " + Math.floor(sum) +"%";
 };
@@ -295,9 +279,7 @@ function show_statistics()
 function load()
 {
     var date = new Date();
-    var dateLabel = document.getElementById("show_date_p");
-    var month = date.getMonth() + 1;
-    dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
+    date = document.getElementById("date").value;
     var url = "get_targets_and_results.php";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function()

@@ -14,56 +14,6 @@ html,body
   justify-content: center;
 }
 
-#single_arrow_button{
-  margin-left: 2px;
-  margin-right: 2px;
-  background: gray;
-  font-weight: bold;
-}
-
-#single_arrow_button:hover{
-  background: darkgray;
-  font-weight: bold;
-}
-
-#single_arrow_button:active{
-  background: gray;
-  font-weight: bold;
-}
-
-#single_arrow_button:focus{
-  outline: none;
-}
-
-#single_arrow_button:disabled{
-  outline: none;
-}
-
-#double_arrow_button{
-  margin-left: 2px;
-  margin-right: 2px;
-  background: gray;
-  font-weight: bold;
-}
-
-#double_arrow_button:hover{
-  background: darkgray;
-  font-weight: bold;
-}
-
-#double_arrow_button:active{
-  background: gray;
-  font-weight: bold;
-}
-
-#double_arrow_button:focus{
-  outline: none;
-}
-
-#double_arrow_button:disabled{
-  outline: none;
-}
-
 #results_div{
   margin-top: 0%;
   margin-bottom: 4%;
