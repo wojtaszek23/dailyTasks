@@ -26,13 +26,6 @@
 
   <div id="date_panel_div">
     <input type="date" id="date" onChange="date_changed()">
-    <!--
-    <input type="button" id="double_arrow_button" value="<<" onclick="previous_date30days()"></input>
-    <input type="button" id="single_arrow_button" value="<" onclick="previous_date()"></input>
-    <p id="show_date_p"></p>
-    <input type="button" id="single_arrow_button" value=">" onclick="next_date()"></input>
-    <input type="button" id="double_arrow_button" value=">>" onclick="next_date30days()"></input>
--->
   </div>
 
   <div id="results_div">

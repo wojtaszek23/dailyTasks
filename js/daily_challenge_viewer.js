@@ -2,22 +2,9 @@ window.onload = load;
 var targets = [];
 var results = [];
 
-/*function next_date()
-{
-  var dateLabel = document.getElementById("show_date_p");
-  dateLabelArray = dateLabel.innerHTML.split(".");
-  var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
-  date.setDate(date.getDate() + 1);
-  show_results(date);
-  show_targets(date);
-  var month = date.getMonth() + 1;
-  dateLabel.innerHTML = date.getDate() + "." + month + "." + date.getFullYear();
-};*/
-
 function date_changed()
 {
     var date = document.getElementById("date").value;
-    console.log(date);
     show_results(date);
     show_targets(date);
 }
@@ -25,6 +12,7 @@ function date_changed()
 
 function show_targets(date)
 {
+    var date1 = new Date(new Date(date).setHours(0)).getTime();
     var txt = `
         <table id="targets_table">
             <tr>
@@ -44,8 +32,8 @@ function show_targets(date)
     for(let target of targets){
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
-        
-        if( provide_date <= date && ( target.remove_data == null || target.remove_date >= date ) )
+
+        if( provide_date <= date1 && ( target.remove_data == null || target.remove_date >= date1 ) )
         {
         i=i+1;
         txt = txt + 
@@ -74,15 +62,14 @@ function show_targets(date)
 
 function changeDone(value, id)
 {
-    var dateLabel = document.getElementById("show_date_p");
-    dateLabelArray = dateLabel.innerHTML.split(".");
-    var date = new Date(dateLabelArray[2], dateLabelArray[1]-1, dateLabelArray[0], 0, 0, 0, 0);
+    var date = document.getElementById("date").value;
+    date = new Date(new Date(date).setHours(0)).getTime();
     var res_id=-1;
     for(let result of results)
     {    
         var res_date = new Date(new Date(result.date).setHours(0)).getTime();
                 
-        if(res_date == date.getTime())
+        if(res_date == date)
         {
             res_id = result.id;
             break;
@@ -98,7 +85,7 @@ function changeDone(value, id)
             for(let res of results)
             {
                 var res_date = new Date(new Date(res.date).setHours(0)).getTime();
-                if(res_date == date.getTime())
+                if(res_date == date)
                 {
                     res['target_id_'+id] = value;
                 }
@@ -173,33 +160,31 @@ function show_results(date1)
 {    
     var results_table = document.getElementById("results_table");
     results_table.style.display = "none";
-    var result_width_given_date_exsists = false;
-    console.log(date1);
-    var date = new Date(date1);
-    console.log(date);
-    date = date.getTime();
+    var result_with_given_date_exsists = false;
+    var date12 = new Date(date1);
+    var date = date12.getTime();
     for(let result of results)
     {
-        var res_date = new Date(new Date(result.date).setHours(0)).getTime();   
+        var res_date = new Date(new Date(result.date).setHours(2)).getTime();   
         if(res_date == date)
         {
             results_table.style.display = "flex";
-            result_width_given_date_exsists = true;
+            result_with_given_date_exsists = true;
         }
     }
 
-    if(result_width_given_date_exsists == false)
+    if(result_with_given_date_exsists == false)
     {
         return;
     }
 
     var i = 0;
     for(let target of targets){
-        var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
-        var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
+        var provide_date = new Date(new Date(target.provide_date).setHours(2)).getTime();
+        var remove_date = new Date(new Date(target.remove_date).setHours(2)).getTime();
         var id = target.id;
         
-        if( provide_date <= date && ( target.remove_data == null || target.remove_date >= date ) )
+        if( provide_date <= date && ( target.remove_date == null || target.remove_date >= date ) )
         {
             i=i+1;
             var row = document.getElementById("results_table_row_"+id);
@@ -209,8 +194,8 @@ function show_results(date1)
 
             for(let result of results)
             {    
-                var res_date = new Date(new Date(result.date).setHours(0)).getTime();
-                
+                var res_date = new Date(new Date(result.date).setHours(2)).getTime();
+
                 if(res_date == date)
                 {
                     var j;
@@ -218,12 +203,10 @@ function show_results(date1)
                     {
                         var radio = document.getElementById(`results_table_radio_row_` + id + `_done`+j);
                         radio.checked = false;
-                        console.log("j: "+j);
                     }
                     var value = result['target_id_'+id];
                     radio = document.getElementById(`results_table_radio_row_` + id + `_done` + value);
                     radio.checked = true;
-                    console.log("id: "+id);
                 }
             }
         }
@@ -240,8 +223,6 @@ function show_statistics()
     var abc = document.getElementById("statistics_div");
     var i = 0;
     var percent = [];
-    console.log(targets);
-    console.log(results);
     
     for(let target of targets)
     {
@@ -257,9 +238,7 @@ function show_statistics()
             if(result_date >= provide_date && (result_date < remove_date || remove_date == 0))
             {
                 if(scale!=0) percent[i] = result['target_id_'+id] / scale;
-                console.log("id: "+id+" "+percent[i]);
                 i=i+1;
-                //console.log(percent[i]);
             }
         }
     }
@@ -269,17 +248,14 @@ function show_statistics()
     {
         if(element!=undefined) sum = sum + element;
     }
-    console.log("sum: " + sum);
-    console.log("percent.length: " + percent.length);
-    console.log("percent: " + percent);
+    
     sum = 100* sum / percent.length;
     abc.innerHTML = "Całościowy dotychczasowy stopień realizacji zadań: " + Math.floor(sum) +"%";
 };
 
 function load()
 {
-    var date = new Date();
-    date = document.getElementById("date").value;
+    var date = document.getElementById("date").value;
     var url = "get_targets_and_results.php";
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function()

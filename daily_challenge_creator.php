@@ -132,7 +132,7 @@
       cellDecission.innerHTML = '<input text id="decission' + id + '" name="decission' + id + '" style="box-sizing: border-box; width: 100%;"/>';
       cellShortCut.innerHTML = '<input text id="shortcut' + id + '" name="shortcut' + id + '" style="box-sizing: border-box; width: 100%;"/>';
       cellScale.innerHTML = '<input type="number" id="scale' + id + '" name="scale' + id +  
-      '" style="box-sizing: border-box; width: 100%;" min="0" max="5" value="1" onchange="changeScale('+id+')"/>';
+      '" style="box-sizing: border-box; width: 100%;" min="1" max="5" value="1" onchange="changeScale('+id+')"/>';
       
       cellStatus[0].innerHTML = '<input text id="done' + "0_" + id + '" name="done' + "0_" + id +  '" style="box-sizing: border-box; width: 100%;"/>';
       cellStatus[1].innerHTML = '<input text id="done' + "1_" + id + '" name="done' + "1_" + id +  '" style="box-sizing: border-box; width: 100%;"/>';
