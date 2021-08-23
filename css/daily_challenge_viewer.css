@@ -80,3 +80,7 @@ td{
   margin-left: 2px;
   margin-right: 2px;
 }
+
+#logout_button{
+  float: right;
+}

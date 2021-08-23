@@ -24,6 +24,12 @@
 </head>
 <body>
 
+  <div id="logout_div">
+    <a href="./logout.php">
+      <input type="button" id="logout_button" value="Wylogowanie"></input>
+    </a>
+  </div>
+
   <div id="date_panel_div">
     <input type="date" id="date" onChange="date_changed()">
   </div>

@@ -50,6 +50,12 @@
       width: 8%;
       text-align: center;
     }
+    #logout_button{
+      float: right;
+    }
+    #logout_div{
+      margin: 0.5em;
+    }
   </style>
   <script>
     var num_rows = 0;
@@ -147,6 +153,12 @@
   </script>
 </head>
 <body>
+  <div id="logout_div">
+    <a href="./logout.php">
+      <input type="button" id="logout_button" value="Wylogowanie"></input>
+    </a>
+  </div>
+  <div style="clear:both"></div>
   <form id="daily_tasks_form" action="./save.php" method="post">
     <table id="creating_tasks_table" name="creating_tasks_table">
       <tr>
