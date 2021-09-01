@@ -1,3 +1,37 @@
 #logout_button{
-    float: right;
-  }
+  float: right;
+}
+
+
+
+#daily_tasks{
+  width: 33%;
+}
+
+.daily_task_section{
+  min-height: 75px;
+  display: grid;
+  grid-template-columns: 49% 2% 49%;
+  grid-template-rows: 49% 2% 49%;
+  border: 1px solid black;
+  margin: 20px;
+}
+
+.daily_task_name_field{
+  box-sizing: border-box;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.daily_task_edit_button{
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.daily_task_remove_botton{
+  grid-row-start: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}

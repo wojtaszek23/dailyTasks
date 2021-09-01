@@ -29,21 +29,22 @@
       <input type="button" id="logout_button" value="Wylogowanie"></input>
     </a>
   </aside>
+  <div style="clear:both;"></div>
   <article id="daily_tasks">
-    <section class="daily_task_section" id="daily_task_1">
-        <input type="text" id="daily_task_1_name_field"/>
-        <input type="button" id="daily_task_1_edit_button"/>
-        <input type="remove" id="daily_task_1_remove_button"/>
+    <section class="daily_task_section" id="daily_task_1" style="border: 1px solid black;">
+        <input type="text" id="daily_task_1_name_field" class="daily_task_name_field"/>
+        <input type="button" id="daily_task_1_edit_button" class="daily_task_edit_button"/>
+        <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton"/>
     </section>
-    <section class="daily_task_section" id="daily_task_2">
-        <input type="text" id="daily_task_2_name_field"/>
+    <section class="daily_task_section" id="daily_task_2" style="border: 1px solid black;">
+        <input type="text" id="daily_task_2_name_field" class="daily_task_name_field"/>
         <input type="button" id="daily_task_2_edit_button"/>
-        <input type="remove" id="daily_task_2_remove_button"/>
+        <input type="button" id="daily_task_2_remove_button"/>
     </section>
-    <section class="daily_task_section" id="daily_task_3">
-        <input type="text" id="daily_task_3_name_field"/>
+    <section class="daily_task_section" id="daily_task_3" style="">
+        <input type="text" id="daily_task_3_name_field" class="daily_task_name_field"/>
         <input type="button" id="daily_task_3_edit_button"/>
-        <input type="remove" id="daily_task_3_remove_button"/>
+        <input type="button" id="daily_task_3_remove_button"/>
     </section>
   </article>
   <article id="calendars">
