@@ -23,62 +23,72 @@
 
 </head>
 <body>
-
   <aside id="logout_div">
     <a href="./logout.php">
       <input type="button" id="logout_button" value="Wylogowanie"></input>
     </a>
   </aside>
-  <div style="clear:both;"></div>
+  <header id="title">
+    <h2 style="padding:0; margin: 0;">Coś tam coś tam użytkownika XYZ</h2>
+  </header>
   <article id="daily_tasks">
-    <section class="daily_task_section" id="daily_task_1" style="border: 1px solid black;">
-        <input type="text" id="daily_task_1_name_field" class="daily_task_name_field"/>
-        <input type="button" id="daily_task_1_edit_button" class="daily_task_edit_button"/>
-        <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton"/>
+    <header id="daily_tasks_title">
+      <h3>Codzienne założenia</h3>
+    </header>
+    <section class="daily_task_section" id="daily_task_1">
+        <input type="text" id="daily_task_1_name_field" class="daily_task_name_field" disabled/>
+        <input type="button" id="daily_task_1_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
-    <section class="daily_task_section" id="daily_task_2" style="border: 1px solid black;">
-        <input type="text" id="daily_task_2_name_field" class="daily_task_name_field"/>
-        <input type="button" id="daily_task_2_edit_button"/>
-        <input type="button" id="daily_task_2_remove_button"/>
+    <section class="daily_task_section" id="daily_task_2">
+        <input type="text" id="daily_task_2_name_field" class="daily_task_name_field" disabled/>
+        <input type="button" id="daily_task_2_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="daily_task_2_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
-    <section class="daily_task_section" id="daily_task_3" style="">
-        <input type="text" id="daily_task_3_name_field" class="daily_task_name_field"/>
-        <input type="button" id="daily_task_3_edit_button"/>
-        <input type="button" id="daily_task_3_remove_button"/>
+    <section class="daily_task_section" id="daily_task_3">
+        <input type="text" id="daily_task_3_name_field" class="daily_task_name_field" disabled/>
+        <input type="button" id="daily_task_3_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="daily_task_3_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
   </article>
   <article id="calendars">
+    <header id="calendars_title">
+      <h3>Kalendarze</h3>
+    </header>
     <section class="calendar_section" id="calendar_1">
-        <input type="text" id="calendar_1_name_field"/>
-        <input type="button" id="calendar_1_edit_button"/>
-        <input type="remove" id="calendar_1_remove_button"/>
+        <input type="text" id="calendar_1_name_field" class="calendar_name_field" disabled/>
+        <input type="button" id="calendar_1_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="calendar_1_remove_button" class="calendar_remove_botton" value="Usuń"/>
     </section>
     <section class="calendar_section" id="calendar_2">
-        <input type="text" id="calendar_2_name_field"/>
-        <input type="button" id="calendar_2_edit_button"/>
-        <input type="remove" id="calendar_2_remove_button"/>
+        <input type="text" id="calendar_2_name_field" class="calendar_name_field" disabled/>
+        <input type="button" id="calendar_2_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="calendar_2_remove_button" class="calendar_remove_botton" value="Usuń"/>
     </section>
     <section class="calendar_section" id="calendar_3">
-        <input type="text" id="calendar_3_name_field"/>
-        <input type="button" id="calendar_3_edit_button"/>
-        <input type="remove" id="calendar_3_remove_button"/>
+        <input type="text" id="calendar_3_name_field" class="calendar_name_field" disabled/>
+        <input type="button" id="calendar_3_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="calendar_3_remove_button" class="calendar_remove_botton" value="Usuń"/>
     </section>
   </article>
   <article id="diaries">
+    <header id="diaries_title">
+      <h3>Notatniki/Pamiętniki</h3>
+    </header>
     <section class="diary_section" id="daily_task_1">
-        <input type="text" id="diary_1_name_field"/>
-        <input type="button" id="diary_1_edit_button"/>
-        <input type="remove" id="diary_1_remove_button"/>
+        <input type="text" id="diary_1_name_field" class="diary_name_field" disabled/>
+        <input type="button" id="diary_1_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="diary_1_remove_button" class="diary_remove_button" value="Usuń"/>
     </section>
     <section class="diary_section" id="daily_task_2">
-        <input type="text" id="diary_2_name_field"/>
-        <input type="button" id="diary_2_edit_button"/>
-        <input type="remove" id="diary_2_remove_button"/>
+        <input type="text" id="diary_2_name_field" class="diary_name_field" disabled/>
+        <input type="button" id="diary_2_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="diary_2_remove_button" class="diary_remove_button" value="Usuń"/>
     </section>
     <section class="diary_section" id="daily_task_3">
-        <input type="text" id="diary_3_name_field"/>
-        <input type="button" id="diary_3_edit_button"/>
-        <input type="remove" id="diary_3_remove_button"/>
+        <input type="text" id="diary_3_name_field" class="diary_name_field" disabled/>
+        <input type="button" id="diary_3_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
+        <input type="button" id="diary_3_remove_button" class="diary_remove_button" value="Usuń"/>
     </section>
   </article>
 </body>

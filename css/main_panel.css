@@ -1,27 +1,110 @@
-#logout_button{
-  float: right;
+body{
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 5% 25% 5% 25% 5% 25% 5%; 
+  grid-template-rows: 5% 5% 5% 25% 5% 25% 5% 25%;
+  min-height: 500px;
+  background-image: linear-gradient(to bottom right, orange, rgb(29, 29, 29));
+  background-size: 100vw 100vh;
 }
 
+#title{
+  text-align: center;
+  grid-column-start: 1;
+  grid-column-end: 8;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
 
+#logout_div{
+  grid-column-start: 7;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
 
 #daily_tasks{
-  width: 33%;
+  display: grid;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 9;
+  grid-template-rows: 15% 25% 5% 25% 5% 25%;
+  padding: 0;
+  border: 4px outset slategray;
+  background-image: linear-gradient(to bottom right, rgb(230, 200, 4), rgb(212, 19, 19), black );
+}
+
+#daily_tasks_title{
+  grid-row-start:1;
+  grid-row-end: 2;
+  text-align: center;
+}
+
+#calendars_title{
+  grid-row-start:1;
+  grid-row-end: 2;
+  text-align: center;
+}
+
+#diaries_title{
+  grid-row-start:1;
+  grid-row-end: 2;
+  text-align: center;
+}
+
+#calendars{
+  display: grid;
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 9;
+  grid-template-rows: 15% 25% 5% 25% 5% 25%;
+  border: 4px outset slategray;
+  background-image: linear-gradient(to bottom right, green, black );
+}
+
+#diaries{
+  display: grid;
+  grid-column-start: 6;
+  grid-column-end: 7;
+  grid-row-start: 4;
+  grid-row-end: 9;
+  grid-template-rows: 15% 25% 5% 25% 5% 25%;
+  border: 4px outset slategray;
+  background-image: linear-gradient(to bottom right, blue, black);
+}
+
+#daily_task_1{
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#daily_task_2{
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+#daily_task_3{
+  grid-row-start: 6;
+  grid-row-end: 7;
 }
 
 .daily_task_section{
-  min-height: 75px;
+  border: 1px solid black;
   display: grid;
   grid-template-columns: 49% 2% 49%;
   grid-template-rows: 49% 2% 49%;
   border: 1px solid black;
-  margin: 20px;
+  padding: 0;
 }
 
 .daily_task_name_field{
   box-sizing: border-box;
-  width: 100%;
   grid-column-start: 1;
   grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .daily_task_edit_button{
@@ -31,6 +114,92 @@
 }
 
 .daily_task_remove_botton{
+  grid-row-start: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+#calendar_1{
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+#calendar_2{
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+#calendar_3{
+  grid-row-start: 6;
+  grid-row-end: 7;
+}
+
+.calendar_section{
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 49% 2% 49%;
+  grid-template-rows: 49% 2% 49%;
+  border: 1px solid black;
+  padding: 0;
+}
+
+.calendar_name_field{
+  box-sizing: border-box;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.calendar_edit_button{
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.calendar_remove_botton{
+  grid-row-start: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+#diary_1{
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+#diary_2{
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+#diary_3{
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+
+.diary_section{
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: 49% 2% 49%;
+  grid-template-rows: 49% 2% 49%;
+  border: 1px solid black;
+  padding: 0;
+}
+
+.diary_name_field{
+  box-sizing: border-box;
+  width: 100%;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.diary_edit_button{
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.diary_remove_button{
   grid-row-start: 3;
   grid-column-start: 3;
   grid-column-end: 4;
