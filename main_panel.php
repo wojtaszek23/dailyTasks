@@ -19,8 +19,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Daily Challenge Viewer</title>
   <link rel="stylesheet" href="./css/main_panel.css" type="text/css" />
-  <script type="text/javascript" src="./js/daily_challenge_viewer.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
 </head>
 <body>
   <aside id="logout_div">
@@ -37,17 +37,17 @@
     </header>
     <section class="daily_task_section" id="daily_task_1">
         <input type="text" id="daily_task_1_name_field" class="daily_task_name_field" disabled/>
-        <input type="button" id="daily_task_1_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <button type="button" id="daily_task_1_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(1)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_2">
         <input type="text" id="daily_task_2_name_field" class="daily_task_name_field" disabled/>
-        <input type="button" id="daily_task_2_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <button type="button" id="daily_task_2_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(2)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_2_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_3">
         <input type="text" id="daily_task_3_name_field" class="daily_task_name_field" disabled/>
-        <input type="button" id="daily_task_3_edit_button" class="daily_task_edit_button" value="Wprowadź/Edytuj"/>
+        <button type="button" id="daily_task_3_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(3)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_3_remove_button" class="daily_task_remove_botton" value="Usuń"/>
     </section>
   </article>
@@ -91,4 +91,5 @@
         <input type="button" id="diary_3_remove_button" class="diary_remove_button" value="Usuń"/>
     </section>
   </article>
+  <script type="text/javascript" src="./js/main_panel.js"></script>
 </body>
