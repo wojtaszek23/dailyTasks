@@ -2,20 +2,48 @@
 
 session_start();
 
+if(!isset($_SESSION['nick_logged']) || $_SESSION['logged'] == false)
+{
+  //return to chat initial screen
+  header('location: ./welcome.php');
+  //stop reading this file to load url above imidiately
+  exit();
+}
+if(!isset($_SESSION['creating_daily_task_name']) || !isset($_SESSION['nr_of_daily_task']))
+{
+  //return to chat initial screen
+  header('location: ./welcome.php');
+  //stop reading this file to load url above imidiately
+  exit();
+}
+
 if(!empty($_POST))
 {
   require_once "../connection_strings.php";
   
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
  
-  $challange_name = $_SESSION['nick']."_challange";
+  $nick = $_SESSION['nick_logged'];
+
+  $daily_task_name = $_SESSION['creating_daily_task_name'];
+
+  $challange_name = $nick."_daily_task_".$daily_task_name;
 
   $challange_name_results = $challange_name."_results";
+
+  $nr = $_SESSION['nr_of_daily_task'];
+
+  $kind = "daily_task_".$nr;
 
   if($connection->connect_errno != 0)
   {
     throw new Exception(myslqi_connect_errno());
   }
+
+  $connection->query("UPDATE `__users` SET `$kind`='$daily_task_name' WHERE `user`='$nick'");
+
+  unset($_SESSION['creating_daily_task_name']);
+  unset($_SESSION['nr_of_daily_task']);
 
   $connection->query("CREATE TABLE `$challange_name` (
     `id` int(11) NOT NULL,
@@ -68,8 +96,6 @@ if(!empty($_POST))
   $creating_results_string = $creating_results_string.") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
 
   $connection->query("$creating_results_string");
-
-  echo $creating_results_string;
   
   $connection->query("ALTER TABLE `$challange_name_results`
     ADD PRIMARY KEY (`id`);");
@@ -107,6 +133,8 @@ if(!empty($_POST))
   $connection->query("$insert_first_day_results_string");  
 
   $connection->close();
+
+  header('Location: ./main_panel.php');
 }
 
 ?>

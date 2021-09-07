@@ -15,12 +15,12 @@
     throw new Exception();
   }
 
-  if(!isset($_GET['contentType']) || !isset($_GET['name']))
+  if(!isset($_GET['nr']) || !isset($_GET['name']))
   {
       throw new Exception();
   }
 
-  $nr = $_GET['contentType'];
+  $nr = $_GET['nr'];
   $name = $_GET['name'];
   $kind;
   $nick = $_SESSION['nick_logged'];
@@ -31,19 +31,6 @@
     $kind = 'daily_task_2';
   else if($nr == 3)
     $kind = 'daily_task_3';
-  else if($nr == 4)
-    $kind = 'calendar_1';
-  else if($nr == 5)
-    $kind = 'calendar_2';
-  else if($nr == 6)
-    $kind = 'calendar_3';
-  else if($nr == 7)
-    $kind = 'diary_1';
-  else if($nr == 8)
-    $kind = 'diary_2';
-  else if($nr == 9)
-    $kind = 'diary_3';
-
 
   require_once "../connection_strings.php";
   
@@ -55,25 +42,25 @@
   }
 
   $nick = $_SESSION['nick_logged'];
-  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind`='$name'");
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick'");
   
   if($result->num_rows == 0)
   {
       throw new Exception();
-      exit();
   }
 
-  $table_name = $nick."_daily_task_".$name;
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind`=''");
+  $connection->close(); 
+  if($result->num_rows != 1)
+  {
+      throw new Exception();
+  }
 
-  $table_name_results = $table_name."_results";
+  $_SESSION['creating_daily_task_name'] = $name;
+  $_SESSION['nr_of_daily_task'] = $nr;
   
-  $connection->query("DROP TABLE `$table_name`");
-
-  $connection->query("DROP TABLE `$table_name_results`");
-
-  $connection->query("UPDATE `__users` SET `$kind`='' WHERE `user`='$nick'");
-
-  $connection->close();
-
-  echo "ok";
+  //../ because this script was called by "get" method and got "/" character, then,
+  //it was nessecarry to leave it and text after this.
+  header('Location: ../daily_challenge_creator.php');
+  exit();
 ?>

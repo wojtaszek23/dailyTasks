@@ -15,6 +15,13 @@
     throw new Exception();
   }
 
+  if(!isset($_GET['name']))
+  {
+    throw new Exception();
+  }
+
+  $name = $_GET['name'];
+
   require_once "../connection_strings.php";
   
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
@@ -25,22 +32,20 @@
   }
 
   $nick = $_SESSION['nick_logged'];
-  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick'");
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND
+  (`daily_task_1`='$name' OR `daily_task_2`='$name' OR `daily_task_3`='$name')
+  ");
   
-  if($result->num_rows == 0)
-  {
-      throw new Exception();
-      exit();
-  }
-
-  while($row = mysqli_fetch_assoc($result))
-  {
-    $data[] = $row;
-  }
-  
-  $jsoned_data = json_encode($data);
-
   $connection->close();
 
-  echo $jsoned_data;
+  if($result->num_rows > 0)
+  {
+      echo "yes";
+      exit();
+  }
+  else
+  {
+      echo "no";
+      exit();
+  }
 ?>

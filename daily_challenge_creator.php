@@ -1,6 +1,14 @@
 <?php
   session_start();
+  
   if(!isset($_SESSION['nick_logged']) || $_SESSION['logged'] == false)
+  {
+    //return to chat initial screen
+    header('location: ./welcome.php');
+    //stop reading this file to load url above imidiately
+    exit();
+  }
+  if(!isset($_SESSION['creating_daily_task_name']) || !isset($_SESSION['nr_of_daily_task']))
   {
     //return to chat initial screen
     header('location: ./welcome.php');
@@ -68,9 +76,9 @@
       var table = document.getElementById("creating_tasks_table");
       if( table.rows.length > 1 )
       {
-	var row = table.deleteRow(-1);
-	num_rows = num_rows - 1;
-	document.getElementById('num_rows').value = num_rows;
+	      var row = table.deleteRow(-1);
+	      num_rows = num_rows - 1;
+	      document.getElementById('num_rows').value = num_rows;
       }
     }
     function changeScale(id)
@@ -159,6 +167,8 @@
     </a>
   </div>
   <div style="clear:both"></div>
+  <h2 style="text-align: center;">Kreator Codziennych zadań "<?php echo $_SESSION['creating_daily_task_name']?>" 
+  użytkownika <?php echo $_SESSION['nick_logged']?></h2>
   <form id="daily_tasks_form" action="./save.php" method="post">
     <table id="creating_tasks_table" name="creating_tasks_table">
       <tr>

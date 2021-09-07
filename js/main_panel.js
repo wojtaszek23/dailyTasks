@@ -26,17 +26,6 @@ function fill_dailies(){
     $("#diary_3_name_field").val(dailies[0]['diary_3']);
 }
 
-function load()
-{
-    get_dailies();
-}
-
-
-
-$(document).ready(
-    load
-);
-
 function daily_task_edit_button_clicked(nr)
 {
     var old_name = $("#daily_task_"+nr+"_name_field").val();
@@ -46,10 +35,48 @@ function daily_task_edit_button_clicked(nr)
     {
         return;
     }
+    var a=0;
+
+    var regex = /^[A-Za-z0-9ąĄćĆęĘłŁńŃóÓśŚźŹżŻ]+$/;
+    if(!regex.test(daily_task_name))
+    {
+        alert("W nazwie dopuszczalnymi znakami są tylko litery (w tym również polskie) oraz cyfry.");
+        return;
+    }
 
     var daily_task_name_field = $("#daily_task_"+nr+"_name_field");
 
-    var daily_tasks_names = [];
+    daily_task_name_field.val(daily_task_name);
+    var name = daily_task_name_field.val();
+
+    var url = "check_if_name_exsists.php";
+    const dataToSend = {
+        name: name
+    }
+    $.get(url, dataToSend)
+    .done(res => {
+        if(res == "yes")
+        {
+            return;
+        }
+        else if(res == "no")
+        {
+            //it is OK
+        }
+    })
+    .fail(() => {
+        alert("Przepraszamy, wystąpił problem podczas próby sprawdzenia dostępności wprowadzonej nazwy.");
+        return;
+    });
+
+    if(old_name == "")
+    {
+        window.location.href = "go_to_daily_challenge_creator.php/q?nr="+nr+"&name="+name;
+    }
+    else
+    {
+        window.location.href = "go_to_daily_challenge_editor.php/q?nr="+nr+"&name="+name;
+    }
 }
 
 function daily_task_remove_button_clicked(nr)
@@ -70,7 +97,7 @@ function daily_task_remove_button_clicked(nr)
         return;
     }
 
-    if(!confirm("Czy na pewno chcesz usunąć Codzienne Wyzwania o nazwie"+daily_task_name+"? Administrator strony nie archiwizuje usuniętych informacji. Nie będzie możliwości przywrócenia ich."))
+    if(!confirm("Czy na pewno chcesz usunąć zasób o nazwie"+daily_task_name+"? Administrator strony nie archiwizuje usuniętych informacji. Nie będzie możliwości przywrócenia ich."))
     {
         return;
     }
@@ -89,3 +116,10 @@ function daily_task_remove_button_clicked(nr)
         alert("Przepraszamy, wystąpił problem podczas próby usunięcia.")
     });
 }
+
+function load()
+{
+    get_dailies();
+}
+
+$(document).ready(load);
