@@ -38,17 +38,17 @@
     <section class="daily_task_section" id="daily_task_1">
         <input type="text" id="daily_task_1_name_field" class="daily_task_name_field" disabled/>
         <button type="button" id="daily_task_1_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(1)">Wprowadź / Edytuj</button>
-        <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton" value="Usuń"/>
+        <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton" onclick="daily_task_remove_button_clicked(1)" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_2">
         <input type="text" id="daily_task_2_name_field" class="daily_task_name_field" disabled/>
         <button type="button" id="daily_task_2_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(2)">Wprowadź / Edytuj</button>
-        <input type="button" id="daily_task_2_remove_button" class="daily_task_remove_botton" value="Usuń"/>
+        <input type="button" id="daily_task_2_remove_button" class="daily_task_remove_botton"  onclick="daily_task_remove_button_clicked(2)" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_3">
         <input type="text" id="daily_task_3_name_field" class="daily_task_name_field" disabled/>
         <button type="button" id="daily_task_3_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(3)">Wprowadź / Edytuj</button>
-        <input type="button" id="daily_task_3_remove_button" class="daily_task_remove_botton" value="Usuń"/>
+        <input type="button" id="daily_task_3_remove_button" class="daily_task_remove_botton"  onclick="daily_task_remove_button_clicked(3)" value="Usuń"/>
     </section>
   </article>
   <article id="calendars">
@@ -58,17 +58,17 @@
     <section class="calendar_section" id="calendar_1">
         <input type="text" id="calendar_1_name_field" class="calendar_name_field" disabled/>
         <input type="button" id="calendar_1_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="calendar_1_remove_button" class="calendar_remove_botton" value="Usuń"/>
+        <input type="button" id="calendar_1_remove_button" class="calendar_remove_botton" onclick="daily_task_remove_button_clicked(4)" value="Usuń"/>
     </section>
     <section class="calendar_section" id="calendar_2">
         <input type="text" id="calendar_2_name_field" class="calendar_name_field" disabled/>
         <input type="button" id="calendar_2_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="calendar_2_remove_button" class="calendar_remove_botton" value="Usuń"/>
+        <input type="button" id="calendar_2_remove_button" class="calendar_remove_botton" onclick="daily_task_remove_button_clicked(5)" value="Usuń"/>
     </section>
     <section class="calendar_section" id="calendar_3">
         <input type="text" id="calendar_3_name_field" class="calendar_name_field" disabled/>
         <input type="button" id="calendar_3_edit_button" class="calendar_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="calendar_3_remove_button" class="calendar_remove_botton" value="Usuń"/>
+        <input type="button" id="calendar_3_remove_button" class="calendar_remove_botton" onclick="daily_task_remove_button_clicked(6)" value="Usuń"/>
     </section>
   </article>
   <article id="diaries">
@@ -78,17 +78,17 @@
     <section class="diary_section" id="daily_task_1">
         <input type="text" id="diary_1_name_field" class="diary_name_field" disabled/>
         <input type="button" id="diary_1_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="diary_1_remove_button" class="diary_remove_button" value="Usuń"/>
+        <input type="button" id="diary_1_remove_button" class="diary_remove_button" onclick="daily_task_remove_button_clicked(7)" value="Usuń"/>
     </section>
     <section class="diary_section" id="daily_task_2">
         <input type="text" id="diary_2_name_field" class="diary_name_field" disabled/>
         <input type="button" id="diary_2_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="diary_2_remove_button" class="diary_remove_button" value="Usuń"/>
+        <input type="button" id="diary_2_remove_button" class="diary_remove_button" onclick="daily_task_remove_button_clicked(8)" value="Usuń"/>
     </section>
     <section class="diary_section" id="daily_task_3">
         <input type="text" id="diary_3_name_field" class="diary_name_field" disabled/>
         <input type="button" id="diary_3_edit_button" class="diary_edit_button" value="Wprowadź/Edytuj"/>
-        <input type="button" id="diary_3_remove_button" class="diary_remove_button" value="Usuń"/>
+        <input type="button" id="diary_3_remove_button" class="diary_remove_button" onclick="daily_task_remove_button_clicked(9)" value="Usuń"/>
     </section>
   </article>
   <script type="text/javascript" src="./js/main_panel.js"></script>

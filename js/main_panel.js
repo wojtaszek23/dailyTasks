@@ -5,7 +5,6 @@ function get_dailies(){
     $.get(url)
     .done(res => {
         dailies = jQuery.parseJSON(res);
-        console.log(dailies[0]['calendar_1']);
         fill_dailies();
     })
     .fail(() => {
@@ -51,8 +50,42 @@ function daily_task_edit_button_clicked(nr)
     var daily_task_name_field = $("#daily_task_"+nr+"_name_field");
 
     var daily_tasks_names = [];
-    
-    
+}
 
+function daily_task_remove_button_clicked(nr)
+{
+    var daily_task_name_id;
 
+    if(nr < 4 && nr > 0)
+        daily_task_name_id = "#daily_task_"+nr+"_name_field";
+    else if(nr < 7)
+        daily_task_name_id = "#calendar_"+(nr-3).toString()+"_name_field";
+    else if(nr < 10)
+        daily_task_name_id = "#diary_"+(nr-6).toString()+"_name_field";
+
+    var daily_task_name = $(daily_task_name_id).val();
+    
+    if(daily_task_name == "")
+    {
+        return;
+    }
+
+    if(!confirm("Czy na pewno chcesz usunąć Codzienne Wyzwania o nazwie"+daily_task_name+"? Administrator strony nie archiwizuje usuniętych informacji. Nie będzie możliwości przywrócenia ich."))
+    {
+        return;
+    }
+
+    var url = "remove_daily_task.php";
+    const removeInfo = {
+        contentType: nr,
+        name: daily_task_name
+    }
+
+    $.get(url, removeInfo)
+    .done(res => {
+        $(daily_task_name_id).val("");
+    })
+    .fail(() => {
+        alert("Przepraszamy, wystąpił problem podczas próby usunięcia.")
+    });
 }
