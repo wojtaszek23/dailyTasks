@@ -43,40 +43,36 @@ function daily_task_edit_button_clicked(nr)
         alert("W nazwie dopuszczalnymi znakami są tylko litery (w tym również polskie) oraz cyfry.");
         return;
     }
-
-    var daily_task_name_field = $("#daily_task_"+nr+"_name_field");
-
-    daily_task_name_field.val(daily_task_name);
-    var name = daily_task_name_field.val();
-
+    
     var url = "check_if_name_exsists.php";
     const dataToSend = {
-        name: name
+        name: daily_task_name
     }
     $.get(url, dataToSend)
     .done(res => {
         if(res == "yes")
         {
+            alert("Isnieją już w Twoim panelu Codzienne Wyzwania o tej samej nazwie. Wybierz inną nazwę.")
             return;
         }
         else if(res == "no")
         {
-            //it is OK
+            var daily_task_name_field = $("#daily_task_"+nr+"_name_field");
+            daily_task_name_field.val(daily_task_name);
+            if(old_name == "")
+            {
+                window.location.href = "go_to_daily_challenge_creator.php/q?nr="+nr+"&name="+daily_task_name+"&type=creator";
+            }
+            else
+            {
+                window.location.href = "go_to_daily_challenge_creator.php/q?nr="+nr+"&name="+daily_task_name+"&type=editor";
+            }
         }
     })
     .fail(() => {
         alert("Przepraszamy, wystąpił problem podczas próby sprawdzenia dostępności wprowadzonej nazwy.");
         return;
     });
-
-    if(old_name == "")
-    {
-        window.location.href = "go_to_daily_challenge_creator.php/q?nr="+nr+"&name="+name;
-    }
-    else
-    {
-        window.location.href = "go_to_daily_challenge_editor.php/q?nr="+nr+"&name="+name;
-    }
 }
 
 function daily_task_remove_button_clicked(nr)
@@ -97,7 +93,7 @@ function daily_task_remove_button_clicked(nr)
         return;
     }
 
-    if(!confirm("Czy na pewno chcesz usunąć zasób o nazwie"+daily_task_name+"? Administrator strony nie archiwizuje usuniętych informacji. Nie będzie możliwości przywrócenia ich."))
+    if(!confirm("Czy na pewno chcesz usunąć zasób o nazwie "+daily_task_name+"? Administrator strony nie archiwizuje usuniętych informacji. Nie będzie możliwości przywrócenia ich."))
     {
         return;
     }
@@ -120,6 +116,7 @@ function daily_task_remove_button_clicked(nr)
 function load()
 {
     get_dailies();
+    //alert("Strona jest w budowie. Aplikacje kalendarz oraz notatniki wkrótce powstaną, na razie można korzystać z Codziennych Wyzwań, swoją drogą jest to najbardziej rozbudowana aplikacja z tych trzech. Pozostałe dwie mają ukazać się niebawem. Zachęcam do sprawdzenia stanu strony na początku października 2021, ale prawdopodobnie wspomniane aplikacje ukażą się już w okolicy 20 września 2021.");
 }
 
 $(document).ready(load);

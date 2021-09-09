@@ -15,7 +15,7 @@
     throw new Exception();
   }
 
-  if(!isset($_GET['nr']) || !isset($_GET['name']))
+  if(!isset($_GET['nr']) || !isset($_GET['name']) || !isset($_GET['type'] ))
   {
       throw new Exception();
   }
@@ -49,18 +49,45 @@
       throw new Exception();
   }
 
-  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind`=''");
-  $connection->close(); 
-  if($result->num_rows != 1)
+  if($_GET['type'] == 'creator')
   {
-      throw new Exception();
+    $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind`=''");
+  
+    if($result->num_rows != 1)
+    {
+        throw new Exception();
+    }
   }
 
   $_SESSION['creating_daily_task_name'] = $name;
   $_SESSION['nr_of_daily_task'] = $nr;
-  
-  //../ because this script was called by "get" method and got "/" character, then,
-  //it was nessecarry to leave it and text after this.
-  header('Location: ../daily_challenge_creator.php');
+  $full_name = $nick."_daily_task_".$name;
+  $full_name_results = $full_name."_results";  
+
+  if($_GET['type'] == 'creator')
+  {
+    $connection->close(); 
+    unset($_GET['type']);
+      //../ because this script was called by "get" method and got "/" character, then,
+      //it was nessecarry to leave it and text after this.
+    header('Location: ../daily_challenge_creator.php');
+    exit();
+  }
+  else if(($_GET['type'] != 'editor'))
+  {
+    exit();
+  }
+
+  $result = $connection->query("SELECT `$kind` FROM `__users` WHERE `user`='$nick'");
+  $row = mysqli_fetch_assoc($result);
+  $old_name = $row[$kind];
+  $old_full_name = $nick."_daily_task_".$old_name;
+  $old_full_name_results = $old_full_name."_results";
+  $connection->query("UPDATE `__users` SET `$kind`='$name' WHERE `user`='$nick'");
+  $connection->query("ALTER TABLE `$old_full_name` RENAME TO `$full_name`");
+  $connection->query("ALTER TABLE `$old_full_name_results` RENAME TO `$full_name_results`");
+  $connection->close(); 
+  unset($_GET['type']);
+  header('Location: ../daily_challenge_editor.php');
   exit();
 ?>

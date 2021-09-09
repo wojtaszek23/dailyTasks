@@ -86,11 +86,11 @@
       var scale = document.getElementById('scale'+id);
       if(scale.value < 0)
       {
-	scale.value = 0;
+	      scale.value = 0;
       }
       else if(scale.value > 5)
       {
-	scale.value = 5;
+	      scale.value = 5;
       }
       
       var done1 = document.getElementById('done'+"1_"+id);
@@ -106,23 +106,23 @@
       done5.removeAttribute("disabled","");
       if(scale.value < 5)
       {
-	done5.setAttribute("disabled","");
+	      done5.setAttribute("disabled","");
       }
       if(scale.value < 4)
       {
-	done4.setAttribute("disabled","");
+	      done4.setAttribute("disabled","");
       }
       if(scale.value < 3)
       {
-	done3.setAttribute("disabled","");
+	      done3.setAttribute("disabled","");
       }
       if(scale.value < 2)
       {
-	done2.setAttribute("disabled","");
+	      done2.setAttribute("disabled","");
       }
       if(scale.value < 1)
       {
-	done1.setAttribute("disabled","");
+	      done1.setAttribute("disabled","");
       }
     }
     function addRowToTable()
@@ -152,7 +152,7 @@
       cellStatus[1].innerHTML = '<input text id="done' + "1_" + id + '" name="done' + "1_" + id +  '" style="box-sizing: border-box; width: 100%;"/>';
       for(var i = 2; i < 6; i++)
       {
-	cellStatus[i].innerHTML = '<input text id="done' + i + "_" + id + '" name="done' + i + "_" + id +  '" style="box-sizing: border-box; width: 100%;" disabled/>';
+	      cellStatus[i].innerHTML = '<input text id="done' + i + "_" + id + '" name="done' + i + "_" + id +  '" style="box-sizing: border-box; width: 100%;" disabled/>';
       }
       
       num_rows = num_rows + 1;
@@ -172,16 +172,16 @@
   <form id="daily_tasks_form" action="./save.php" method="post">
     <table id="creating_tasks_table" name="creating_tasks_table">
       <tr>
-	<th style="width: 3%;">ID</th>
-	<th style="width: 24%;">TREŚĆ</th>
-	<th style="width: 10%;">SKRÓT</th>
-	<th style="width: 3%;">SKALA</th>
-	<th style="width: 10%;">OPIS WYK. 0</th>
-	<th style="width: 10%;">OPIS WYK. 1</th>
-	<th style="width: 10%;">OPIS WYK. 2</th>
-	<th style="width: 10%;">OPIS WYK. 3</th>
-	<th style="width: 10%;">OPIS WYK. 4</th>
-	<th style="width: 10%;">OPIS WYK. 5</th>
+        <th style="width: 3%;">ID</th>
+        <th style="width: 24%;">TREŚĆ</th>
+        <th style="width: 10%;">SKRÓT</th>
+        <th style="width: 3%;">SKALA</th>
+        <th style="width: 10%;">OPIS WYK. 0</th>
+        <th style="width: 10%;">OPIS WYK. 1</th>
+        <th style="width: 10%;">OPIS WYK. 2</th>
+        <th style="width: 10%;">OPIS WYK. 3</th>
+        <th style="width: 10%;">OPIS WYK. 4</th>
+        <th style="width: 10%;">OPIS WYK. 5</th>
       </tr>
     </table>
     <button type="button" id="add_row_button" onclick="addRowToTable()">+</button>
