@@ -10,12 +10,21 @@
     exit();
   }
 
+  if(!isset($_SESSION['daily_task_name']))
+  {
+
+    //return to chat initial screen
+    echo "no daily_task_name";
+    //stop reading this file to load url above imidiately
+    exit();
+  }
+
   require_once "../connection_strings.php";
   
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
  
-  $challange_name = $_SESSION['nick']."_challange";
-  $challange_name_results = $challange_name."_results";
+  $name = $_SESSION['nick']."_daily_task_".$_SESSION['daily_task_name'];
+  $name_results = $name."_results";
   
   if($connection->connect_errno != 0)
   {
@@ -31,10 +40,8 @@
     exit();
   }
   
-  //TODO: 'provide_data' <=  STR_TO_DATE('10.6.2021', '%d.%m.%Y') // w przypadku customowej daty i wyjąć ją z id elementu na stronie
-  // WHERE 'remove_data' = 0 AND 'provide_data' <= CURRENT_TIMESTAMP 
+  
   $targets_query = $connection->query("SELECT * FROM $challange_name");
-  //AND 'remove_data' = NULL
   $results_query = $connection->query("SELECT * FROM $challange_name_results");
 
   $data['targets'] = [];
@@ -49,14 +56,7 @@
     $data['results'][] = $row_result;
   }
 
-  //echo $_SESSION['nick'];
-
   $data = json_encode($data);
-
-  //echo $data;
-
-  //$jsoned_data = json_encode($data);
-  //$jsoned_results = json_encode($results);
 
   $connection->close();
 
