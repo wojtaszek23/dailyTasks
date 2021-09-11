@@ -29,7 +29,7 @@
     throw new Exception(myslqi_connect_errno());
   }
    
-  $targets_query = $connection->query("SELECT * FROM $name");
+  $targets_query = $connection->query("SELECT * FROM `$name` WHERE `remove_date`=NULL");
 
   $data = [];
 

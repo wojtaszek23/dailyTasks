@@ -52,9 +52,6 @@
       text-align: center;
     }
   </style>
-  <script>
-    
-  </script>
 </head>
 <body>
   
@@ -105,7 +102,7 @@
         </tr>
         <tr>
           <td><input type="button" onclick="deleteTask()" value="Usuń"></input></td>
-          <td><input type="number" min="0"></input></td>
+          <td><input type="number" min="1" id="deleteLp"></input></td>
           <td><input type="text" disabled></input></td>
           <td><input type="text" disabled></input></td>
           <td><input type="number" min="0" max="5" disabled></input></td>
@@ -117,6 +114,5 @@
           <td><input type="text" disabled></input></td>
         </tr>
       </table>
-
 </body>
 </html>
