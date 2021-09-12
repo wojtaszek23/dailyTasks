@@ -23,6 +23,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Codziennie Wyzwania</title>
+  <script type="text/javascript" src="./js/daily_challenge_editor.js"></script>
   <!--link rel="stylesheet" href="./style.css" type="text/css" /-->
   <style>
     html, body{
@@ -53,7 +54,7 @@
     }
   </style>
 </head>
-<body>
+<body onload="loadTable()">
   
   <div id="logout_div">
     <a href="./logout.php">
@@ -68,6 +69,19 @@
   
   <div id="targets_div">
     <table id="targets_table">
+    <tr>
+        <th style="width: 3%;">LP</th>
+        <th style="width: 24%;">TREŚĆ</th>
+        <th style="width: 10%;">SKRÓT</th>
+        <th style="width: 3%;">SKALA</th>
+        <th style="width: 10%;">OPIS WYK. 0</th>
+        <th style="width: 10%;">OPIS WYK. 1</th>
+        <th style="width: 10%;">OPIS WYK. 2</th>
+        <th style="width: 10%;">OPIS WYK. 3</th>
+        <th style="width: 10%;">OPIS WYK. 4</th>
+        <th style="width: 10%;">OPIS WYK. 5</th>
+        <th style="display: none;"></th>
+      </tr>
     </table>
   </div>
 
@@ -99,19 +113,21 @@
           <td><input type="text" disabled></input></td>
           <td><input type="text" disabled></input></td>
           <td><input type="text" disabled></input></td>
+          <td style="display:none;"></td>
         </tr>
         <tr>
           <td><input type="button" onclick="deleteTask()" value="Usuń"></input></td>
-          <td><input type="number" min="1" id="deleteLp"></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="number" min="0" max="5" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
+          <td><input type="number" min="1" id="deleteLp" onchange="changeDeleteLp()"></input></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td style="display:none;"></td>
         </tr>
       </table>
 </body>

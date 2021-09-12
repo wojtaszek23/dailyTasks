@@ -22,14 +22,14 @@
   
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
  
-  $name = $_SESSION['creating_daily_task_name'];
+  $name = $_SESSION['nick_logged']."_daily_task_".$_SESSION['creating_daily_task_name'];
   
   if($connection->connect_errno != 0)
   {
     throw new Exception(myslqi_connect_errno());
   }
    
-  $targets_query = $connection->query("SELECT * FROM `$name` WHERE `remove_date`=NULL");
+  $targets_query = $connection->query("SELECT * FROM `aaa1_daily_task_cósp` WHERE `remove_date` IS NULL");
 
   $data = [];
 

@@ -1,31 +1,33 @@
  
 function addRow(rowData)
 {
-    var table = document.getElementById("debts");
+    //console.log(rowData.decission);
+    var table = document.getElementById("targets_table");
+    console.log(table);
     var rows = table.rows;
-    var lp = rows.length - 1;
+    var lp = rows.length;
     var row = table.insertRow();
 
     var cell1 = row.insertCell(0);
     cell1.innerHTML = lp;
     var cell2 = row.insertCell(1);
-    cell2 = rowData.decission;
+    cell2.innerHTML = rowData.decission;
     var cell3 = row.insertCell(2);
-    cell3 = rowData.shortcut;
+    cell3.innerHTML = rowData.shortcut;
     var cell4 = row.insertCell(3);
-    cell4 = rowData.scale;
+    cell4.innerHTML = rowData.scale;
     var cell5 = row.insertCell(4);
-    cell5 = rowData.done0;
+    cell5.innerHTML = rowData.done0;
     var cell6 = row.insertCell(5);
-    cell6 = rowData.done1;
+    cell6.innerHTML = rowData.done1;
     var cell7 = row.insertCell(6);
-    cell7 = rowData.done2;
+    cell7.innerHTML = rowData.done2;
     var cell8 = row.insertCell(7);
-    cell8 = rowData.done3;
+    cell8.innerHTML = rowData.done3;
     var cell9 = row.insertCell(8);
-    cell9 = rowData.done4;
+    cell9.innerHTML = rowData.done4;
     var cell10 = row.insertCell(9);
-    cell10 = rowData.done5;
+    cell10.innerHTML = rowData.done5;
     var cell11 = row.insertCell(10);
     cell11.innerHTML = rowData.id;
     cell11.style="display: none;";
@@ -36,11 +38,8 @@ function fillTable(data)
     var i = 0;
     for(let row of data)
     {
-        if(row.actual == true)
-        {
-            i = i + 1;
-            addRow(row);
-        }
+        i = i + 1;
+        addRow(row);
     }
 }
 
@@ -55,6 +54,7 @@ function loadTable()
         {
             if(this.responseText!="")
             {
+                console.log(this.responseText);
               var data = JSON.parse(this.responseText);
               fillTable(data);
             }
@@ -134,17 +134,17 @@ function deleteDailyTask()
 	        var deleteLp = parseInt(1)+parseInt(document.getElementById("deleteLp").value);
             var table = document.getElementById("targets_table");
             table.deleteRow(deleteLp);
-            for(var i = 2; i < table.rows.length; i++)
-            {
-                table.rows[i].cells[0].innerHTML = i-1;
-            }
             var unsetRow = document.getElementById("panel").rows[3];
             for(var i = 1; i < 12; i++)
             {
                 unsetRow.cells[i].innerHTML = "";
             }
-            var unsetValue = document.getElementById("unsetLp");
+            var unsetValue = document.getElementById("deleteLp");
             unsetValue.value = 0;
+            for(var i = 2; i < table.rows.length; i++)
+            {
+                table.rows[i].cells[0].innerHTML = i-1;
+            }
         } 
     };
 
@@ -160,22 +160,32 @@ function changeDeleteLp()
   var panel = document.getElementById("panel");
   var panelRow = panel.rows[2];
   var panelCells = panelRow.cells;
-  if(table.rows.length-1 <= lp || lp < 1)
-  {  
-    for(var i = 1; i < 12; i++)
+  if(table.rows.length == 1)
+  {
+    document.getElementById("deleteLp").value = "";
+    for(var i = 1; i < 11; i++)
     {
-      panelCells[i].innerHTML = "";
+      panelCells[i+1].innerHTML = cells[i].innerHTML;
     }
     return;
+  }
+  else if(lp < 1)
+  { 
+    lp = document.getElementById("deleteLp").value = 1; 
+  }
+  else if(lp >= table.rows.length)
+  {
+    lp = document.getElementById("deleteLp").value = table.rows.length - 1;
   };
   var row = table.rows[parseInt(lp)];
   var cells = [];
   cells = row.cells;
   if(cells)
   {
-    for(var i = 1; i < 12; i++)
+    for(var i = 1; i < 11; i++)
     {
-      panelCells[i].innerHTML = cells[i].innerHTML;
+      panelCells[i+1].innerHTML = cells[i].innerHTML;
     }
   }
+  console.log(panelCells);
 }
