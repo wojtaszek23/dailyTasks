@@ -31,10 +31,6 @@ if(!empty($_GET))
 
   $challange_name_results = $challange_name."_results";
 
-  $nr = $_SESSION['nr_of_daily_task'];
-
-  $kind = "daily_task_".$nr;
-
   if($connection->connect_errno != 0)
   {
     throw new Exception(myslqi_connect_errno());
@@ -52,14 +48,19 @@ if(!empty($_GET))
   $connection->query("INSERT INTO `$challange_name` (`decission`, `shortcut`, `scale`, `done0`, `done1`, `done2`, `done3`, `done4`, `done5`) VALUES
 ('$decission', '$shortcut', $scale, '$done0', '$done1', '$done2', '$done3', '$done4', '$done5');");
 
-  $connection->query("ALTER TABLE `$challange_name_results` ADD COLUMN `$daily_task_name` DEFAULT 0;");
-
-  $result = $connection->query("SELECT max(`id`) FROM `$challange_name`;");
+  $result = $connection->query("SELECT MAX(id) FROM `$challange_name`;");
   
-  $id = json_encode($result);
+  $id1;
+  while ($row = $result->fetch_assoc()) {
+    $id = $row['MAX(id)'];
+  }
+
+  $connection->query("ALTER TABLE `$challange_name_results` ADD COLUMN `daily_task_$id` int(11) DEFAULT 0;");
+
   $connection->close();
+  
   echo $id;
+
   exit();
 }
-
 ?>

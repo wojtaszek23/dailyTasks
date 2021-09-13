@@ -87,7 +87,7 @@ function addDailyTaskRow()
         {
             if(this.responseText!="")
             {
-                var id = this.responseText;             
+                var id = this.responseText;
                 var table = document.getElementById("panel");
                 var addingRow = table.rows[1];
                 var cells = [];
@@ -114,8 +114,8 @@ function addDailyTaskRow()
 
 function deleteDailyTaskRow()
 {
-    var lp = document.getElementById("DeleteLp");
-    lp = parseInt(1)+parseInt(lp.value);
+    var lp = document.getElementById("deleteLp");
+    lp = parseInt(lp.value);
     if(document.getElementById("targets_table").rows.length <= lp)
         return;
     var xmlhttp = new XMLHttpRequest();
@@ -127,19 +127,19 @@ function deleteDailyTaskRow()
     {
         if(this.readyState == 4 && this.status == 200) 
         {
-	        var deleteLp = parseInt(1)+parseInt(document.getElementById("deleteLp").value);
+	          var deleteLp = parseInt(document.getElementById("deleteLp").value);
             var table = document.getElementById("targets_table");
             table.deleteRow(deleteLp);
-            var unsetRow = document.getElementById("panel").rows[3];
-            for(var i = 1; i < 12; i++)
+            var unsetRow = document.getElementById("panel").rows[2];
+            for(var i = 2; i < 11; i++)
             {
                 unsetRow.cells[i].innerHTML = "";
             }
             var unsetValue = document.getElementById("deleteLp");
-            unsetValue.value = 0;
-            for(var i = 2; i < table.rows.length; i++)
+            unsetValue.value = '';
+            for(var i = 1; i < table.rows.length; i++)
             {
-                table.rows[i].cells[0].innerHTML = i-1;
+                table.rows[i].cells[0].innerHTML = i;
             }
         } 
     };
