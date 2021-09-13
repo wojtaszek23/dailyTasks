@@ -114,11 +114,11 @@
           <th style="display:none;"></th>
         </tr>
         <tr>
-          <td style="width: 4%; min-width: 40px;"><input type="button" style="width: 100%;" onclick="addDailyTaskRow()" value="Dodaj"></input></td>
-          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%;" disabled></input></td>
+          <td style="width: 4%;"><input type="button" style="width: 100%;" onclick="addDailyTaskRow()" value="Dodaj"></input></td>
+          <td style="width: 4%;"><input type="number" style="width: 100%;" disabled></input></td>
           <td style="width: 20%;"><input type="text" style="width: 100%;"></input></td>
           <td style="width: 10%;"><input type="text" style="width: 100%;"></input></td>
-          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%;" value="1" min="0" max="5" onchange="scaleChanged()" id="scaleOfAddingRow"></input></td>
+          <td style="width: 4%;"><input type="number" style="width: 100%;" value="1" min="0" max="5" onchange="scaleChanged()" id="scaleOfAddingRow"></input></td>
           <td style="width: 10%;"><input type="text" style="width: 100%;" id="done0"></input></td>
           <td style="width: 10%;"><input type="text" style="width: 100%;" id="done1"></input></td>
           <td style="width: 10%;"><input type="text" style="width: 100%;" id="done2" disabled></input></td>
@@ -128,11 +128,11 @@
           <td style="display:none;"></td>
         </tr>
         <tr>
-          <td style="width: 4%; min-width: 40px;"><input type="button" style="width: 100%;" onclick="deleteDailyTaskRow()" value="Usuń"></input></td>
-          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%; padding: 5%" min="1" id="deleteLp" onchange="changeDeleteLp()"></input></td>
+          <td style="width: 4%;"><input type="button" style="width: 100%;" onclick="deleteDailyTaskRow()" value="Usuń"></input></td>
+          <td style="width: 4%;"><input type="number" style="width: 100%; padding: 5%" min="1" id="deleteLp" onchange="changeDeleteLp()"></input></td>
           <td style="width: 10%;"></td>
           <td style="width: 10%;"></td>
-          <td style="width: 10%; min-width: 40px;"></td>
+          <td style="width: 10%;"></td>
           <td style="width: 10%;"></td>
           <td style="width: 10%;"></td>
           <td style="width: 10%;"></td>

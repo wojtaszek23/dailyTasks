@@ -1,8 +1,6 @@
- 
 function addRow(rowData)
 {
     var table = document.getElementById("targets_table");
-    console.log(table);
     var rows = table.rows;
     var lp = rows.length;
     var row = table.insertRow();
@@ -53,7 +51,6 @@ function loadTable()
         {
             if(this.responseText!="")
             {
-                console.log(this.responseText);
               var data = JSON.parse(this.responseText);
               fillTable(data);
             }
@@ -92,7 +89,7 @@ function addDailyTaskRow()
             {
                 var id = this.responseText;             
                 var table = document.getElementById("panel");
-                var addingRow = table.rows[2];
+                var addingRow = table.rows[1];
                 var cells = [];
                 cells = addingRow.cells;
                 var row = [];
@@ -190,7 +187,6 @@ function changeDeleteLp()
 
 function scaleChanged()
 {
-  console.log("dupa");
   var scale = document.getElementById("scaleOfAddingRow").value;
   if(scale < 5)
   {
