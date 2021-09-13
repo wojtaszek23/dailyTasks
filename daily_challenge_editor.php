@@ -52,6 +52,14 @@
     {
       text-align: center;
     }
+    #panel{
+      width: 100%;
+    }
+    input{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
   </style>
 </head>
 <body onload="loadTable()">
@@ -86,49 +94,54 @@
   </div>
 
   <h3>Panel do zarządzania danymi:</h3>
-      
-      <table id="panel">
+
+  <div style="clear:both"></div>
+
+    <div id="panel_div">
+      <table id="panel" style="table-layout:fixed;">
         <tr>
-          <th></th>
-          <th>ID</th>
-          <th>Treść</th>
-          <th>Skrót</th>
-          <th>Skala</th>
-          <th>Opis wyk. 0</th>
-          <th>Opis wyk. 1</th>
-          <th>Opis wyk. 2</th>
-          <th>Opis wyk. 3</th>
-          <th>Opis wyk. 4</th>
-          <th>Opis wyk. 5</th>
+          <th style="width: 4%; min-width: 40px;"></th>
+          <th style="width: 4%; min-width: 40px;">ID</th>
+          <th style="width: 20%;">Treść</th>
+          <th style="width: 10%;">Skrót</th>
+          <th style="width: 4%; min-width: 40px;">Skala</th>
+          <th style="width: 10%;">Opis wyk. 0</th>
+          <th style="width: 10%;">Opis wyk. 1</th>
+          <th style="width: 10%;">Opis wyk. 2</th>
+          <th style="width: 10%;">Opis wyk. 3</th>
+          <th style="width: 10%;">Opis wyk. 4</th>
+          <th style="width: 10%;">Opis wyk. 5</th>
+          <th style="display:none;"></th>
         </tr>
         <tr>
-          <td><input type="button" onclick="addTask()" value="Dodaj"></input></td>
-          <td><input type="number" disabled></input></td>
-          <td><input type="text"></input></td>
-          <td><input type="text"></input></td>
-          <td><input type="number" value="1" min="0" max="5"></input></td>
-          <td><input type="text"></input></td>
-          <td><input type="text"></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
-          <td><input type="text" disabled></input></td>
+          <td style="width: 4%; min-width: 40px;"><input type="button" style="width: 100%;" onclick="addDailyTaskRow()" value="Dodaj"></input></td>
+          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%;" disabled></input></td>
+          <td style="width: 20%;"><input type="text" style="width: 100%;"></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;"></input></td>
+          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%;" value="1" min="0" max="5" onchange="scaleChanged()" id="scaleOfAddingRow"></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done0"></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done1"></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done2" disabled></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done3" disabled></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done4" disabled></input></td>
+          <td style="width: 10%;"><input type="text" style="width: 100%;" id="done5" disabled></input></td>
           <td style="display:none;"></td>
         </tr>
         <tr>
-          <td><input type="button" onclick="deleteTask()" value="Usuń"></input></td>
-          <td><input type="number" min="1" id="deleteLp" onchange="changeDeleteLp()"></input></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td style="width: 4%; min-width: 40px;"><input type="button" style="width: 100%;" onclick="deleteDailyTaskRow()" value="Usuń"></input></td>
+          <td style="width: 4%; min-width: 40px;"><input type="number" style="width: 100%; padding: 5%" min="1" id="deleteLp" onchange="changeDeleteLp()"></input></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%; min-width: 40px;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
+          <td style="width: 10%;"></td>
           <td style="display:none;"></td>
         </tr>
       </table>
+    </div>
 </body>
 </html>

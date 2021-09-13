@@ -1,7 +1,6 @@
  
 function addRow(rowData)
 {
-    //console.log(rowData.decission);
     var table = document.getElementById("targets_table");
     console.log(table);
     var rows = table.rows;
@@ -65,7 +64,7 @@ function loadTable()
     xmlhttp.send();
 }
 
-function addDailyTask()
+function addDailyTaskRow()
 {
     var xmlhttp = new XMLHttpRequest();
     var url = "./add_daily_task_row.php";
@@ -116,7 +115,7 @@ function addDailyTask()
     xmlhttp.send();
 }
 
-function deleteDailyTask()
+function deleteDailyTaskRow()
 {
     var lp = document.getElementById("DeleteLp");
     lp = parseInt(1)+parseInt(lp.value);
@@ -187,5 +186,56 @@ function changeDeleteLp()
       panelCells[i+1].innerHTML = cells[i].innerHTML;
     }
   }
-  console.log(panelCells);
+}
+
+function scaleChanged()
+{
+  console.log("dupa");
+  var scale = document.getElementById("scaleOfAddingRow").value;
+  if(scale < 5)
+  {
+    document.getElementById("done5").value="";
+    document.getElementById("done5").setAttribute("disabled", '');
+  }
+  if(scale < 4)
+  {
+    document.getElementById("done4").value="";
+    document.getElementById("done4").setAttribute("disabled", '');
+  }
+  if(scale < 3)
+  {
+    document.getElementById("done3").value="";
+    document.getElementById("done3").setAttribute("disabled", '');
+  }
+  if(scale < 2)
+  {
+    document.getElementById("done2").value="";
+    document.getElementById("done2").setAttribute("disabled", '');
+  }
+  if(scale < 1)
+  {
+    document.getElementById("done1").value="";
+    document.getElementById("done1").setAttribute("disabled", '');
+  }
+
+  if(scale > 4)
+  {
+    document.getElementById("done5").removeAttribute("disabled");
+  }
+  if(scale > 3)
+  {
+    document.getElementById("done4").removeAttribute("disabled");
+  }
+  if(scale > 2)
+  {
+    document.getElementById("done3").removeAttribute("disabled");
+  }
+  if(scale > 1)
+  {
+    document.getElementById("done2").removeAttribute("disabled");
+  }
+  if(scale > 0)
+  {
+    document.getElementById("done1").removeAttribute("disabled");
+  }
 }
