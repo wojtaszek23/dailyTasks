@@ -36,17 +36,17 @@
       <h3>Codzienne założenia</h3>
     </header>
     <section class="daily_task_section" id="daily_task_1">
-        <input type="text" id="daily_task_1_name_field" class="daily_task_name_field" disabled/>
+        <input type="text" id="daily_task_1_name_field" class="daily_task_name_field" onclick="go_to_daily_task(1)" readonly style="opacity: 0.65;"/>
         <button type="button" id="daily_task_1_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(1)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_1_remove_button" class="daily_task_remove_botton" onclick="daily_task_remove_button_clicked(1)" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_2">
-        <input type="text" id="daily_task_2_name_field" class="daily_task_name_field" disabled/>
+        <input type="text" id="daily_task_2_name_field" class="daily_task_name_field" onclick="go_to_daily_task(2)" readonly style="opacity: 0.65;"/>
         <button type="button" id="daily_task_2_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(2)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_2_remove_button" class="daily_task_remove_botton"  onclick="daily_task_remove_button_clicked(2)" value="Usuń"/>
     </section>
     <section class="daily_task_section" id="daily_task_3">
-        <input type="text" id="daily_task_3_name_field" class="daily_task_name_field" disabled/>
+        <input type="text" id="daily_task_3_name_field" class="daily_task_name_field" onclick="go_to_daily_task(3)" readonly style="opacity: 0.65;"/>
         <button type="button" id="daily_task_3_edit_button" class="daily_task_edit_button" onclick="daily_task_edit_button_clicked(3)">Wprowadź / Edytuj</button>
         <input type="button" id="daily_task_3_remove_button" class="daily_task_remove_botton"  onclick="daily_task_remove_button_clicked(3)" value="Usuń"/>
     </section>

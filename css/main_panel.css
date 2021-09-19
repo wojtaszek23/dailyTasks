@@ -108,6 +108,10 @@ body{
   grid-row-end: 2;
 }
 
+.daily_task_name_field:hover{
+  cursor: pointer;
+}
+
 .daily_task_edit_button{
   white-space: normal;
   grid-row-start: 3;

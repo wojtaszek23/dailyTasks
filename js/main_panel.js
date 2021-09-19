@@ -113,10 +113,17 @@ function daily_task_remove_button_clicked(nr)
     });
 }
 
+function go_to_daily_task(nr)
+{
+    url = 'go_to_daily_challenge_viewer.php'+'/?name='+$('#daily_task_'+nr+'_name_field').val();
+    console.log(url);
+    //console.log('daily_task_'+nr+'_name_field');
+    window.location.href = url;
+}
+
 function load()
 {
     get_dailies();
-    //alert("Strona jest w budowie. Aplikacje kalendarz oraz notatniki wkrótce powstaną, na razie można korzystać z Codziennych Wyzwań, swoją drogą jest to najbardziej rozbudowana aplikacja z tych trzech. Pozostałe dwie mają ukazać się niebawem. Zachęcam do sprawdzenia stanu strony na początku października 2021, ale prawdopodobnie wspomniane aplikacje ukażą się już w okolicy 20 września 2021.");
 }
 
 $(document).ready(load);
