@@ -33,7 +33,7 @@ function show_targets(date)
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
 
-        if( provide_date <= date1 && ( target.remove_date == null || remove_date >= date1 ) )
+        if( provide_date <= date1 && ( target.remove_date == null || remove_date > date1 ) )
         {
             i=i+1;
             txt = txt + 

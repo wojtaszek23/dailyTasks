@@ -117,7 +117,6 @@ function go_to_daily_task(nr)
 {
     url = 'go_to_daily_challenge_viewer.php'+'/?name='+$('#daily_task_'+nr+'_name_field').val();
     console.log(url);
-    //console.log('daily_task_'+nr+'_name_field');
     window.location.href = url;
 }
 

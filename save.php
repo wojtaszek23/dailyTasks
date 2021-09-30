@@ -33,7 +33,7 @@ if(!empty($_POST))
 
   $nr = $_SESSION['nr_of_daily_task'];
 
-  $kind = "daily_task_".$nr;
+  $kind = "target_id_".$nr;
 
   if($connection->connect_errno != 0)
   {

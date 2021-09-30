@@ -73,42 +73,6 @@
 
         header('location: main_panel.php');
         exit();  
-
-        //TODO: approach to daily_challange_viewer was changed- i am going to add
-        //possibility of creating few decission tables for each person and after login
-        //main panel should avoid and user should have self own defined decissions to
-        //choose or edit. This part of code can be used as help while writting select
-        //daily tasks names for viewed person.
-        /*
-        $connection2 = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
-
-        if($connection2->connect_errno != 0)
-        {
-          throw new Exception(mysqli_connect_errno());
-        }
-
-        
-        $resultsName = $nick."_challange_results";
-        $targetsName = $nick."_challange";
-
-        $resultResults = $connection2->query("SHOW TABLES LIKE '$resultsName'");
-        $resultTargets = $connection2->query("SHOW TABLES LIKE '$targetsName'");
-
-        if ($resultResults->num_rows == 0 && $resultTargets->num_rows == 0)
-        {
-          header('location: daily_challenge_creator.php');
-          exit();  
-        }
-        else if ($resultResults->num_rows == 1 && $resultTargets-> num_rows == 1)
-        {
-          header('location: daily_challenge_viewer.php');
-          exit();  
-        }
-        else
-        {
-          $_SESSION['header_text'] = "Wystąpił nieoczekiwany błąd podczas próby odnalezienia tabeli z zadaniami lub wynikami dla nicku '$nick', proszę o zgłoszenie problemu twórcy strony.";
-        }
-        */
       }
       else
       {
