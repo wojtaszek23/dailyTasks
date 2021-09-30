@@ -89,6 +89,7 @@ function changeDone(value, id)
                 if(res_date == date)
                 {
                     res['target_id_'+id] = value;
+                    show_statistics();
                 }
             }
         }
