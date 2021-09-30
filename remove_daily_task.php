@@ -71,7 +71,7 @@
 
   $connection->query("DROP TABLE `$table_name_results`");
 
-  $connection->query("UPDATE `__users` SET `$kind`='' WHERE `user`='$nick'");
+  $connection->query("UPDATE `__users` SET `$kind`=NULL WHERE `user`='$nick'");
 
   $connection->close();
 

@@ -51,10 +51,14 @@
 
   if($_GET['type'] == 'creator')
   {
-    $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind`=''");
-  
+    $text = "SELECT * FROM `__users` WHERE `user`='$nick' AND `$kind` IS NULL";
+    $result = $connection->query($text);
+
     if($result->num_rows != 1)
     {
+      echo $result->num_rows;
+      echo $text;
+      exit();
         throw new Exception();
     }
   }

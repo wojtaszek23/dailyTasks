@@ -31,7 +31,7 @@
     throw new Exception(myslqi_connect_errno());
   }
 
-  $result = $connection->query("SHOW TABLES LIKE '$challange_name'");
+  $result = $connection->query("SHOW TABLES LIKE '$name'");
   
   //successfuly there is some table with given table name name in Database
   if($result->num_rows == 0)
@@ -41,8 +41,8 @@
   }
   
   
-  $targets_query = $connection->query("SELECT * FROM $challange_name");
-  $results_query = $connection->query("SELECT * FROM $challange_name_results");
+  $targets_query = $connection->query("SELECT * FROM $name");
+  $results_query = $connection->query("SELECT * FROM $name_results");
 
   $data['targets'] = [];
   $data['results'] = [];

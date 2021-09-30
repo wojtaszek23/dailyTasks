@@ -27,6 +27,8 @@
   $id = $_GET['id'];
   $value = $_GET['value'];
   $res_id = $_GET['res_id'];
+  $nick = $_SESSION['nick_logged'];
+  $daily_task_name = $_SESSION['daily_task_name'];
 
   $connection = new mysqli($host, $db_user, $password, $db_name_dailyTasks);
 
@@ -35,8 +37,8 @@
     throw new Exception(myslqi_connect_errno());
   }
 
-  $resultsName = $_SESSION['nick_logged']."_challange_results";
-  $targetsName = $_SESSION['nick_logged']."_challange";
+  $resultsName = $_SESSION['nick_logged']."_daily_task_".$daily_task_name."_results";
+  $targetsName = $_SESSION['nick_logged']."_daily_task_".$daily_task_name;
 
   $resultResults = $connection->query("SHOW TABLES LIKE '$resultsName'");
   $resultTargets = $connection->query("SHOW TABLES LIKE '$targetsName'");

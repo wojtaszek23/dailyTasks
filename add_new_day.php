@@ -18,7 +18,7 @@ if(!empty($_POST))
   }
 
   $tables = $connection->query(
-"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.tables WHERE TABLE_NAME LIKE '%_challange_results'");
+"SELECT TABLE_NAME FROM INFORMATION_SCHEMA.tables WHERE TABLE_NAME LIKE '%_daily_task_%_results'");
 
 foreach($table as $tables)
 {

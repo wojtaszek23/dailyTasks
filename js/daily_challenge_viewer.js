@@ -1,4 +1,3 @@
-window.onload = load;
 var targets = [];
 var results = [];
 
@@ -13,6 +12,7 @@ function date_changed()
 function show_targets(date)
 {
     var date1 = new Date(new Date(date).setHours(0)).getTime();
+
     var txt = `
         <table id="targets_table">
             <tr>
@@ -33,14 +33,14 @@ function show_targets(date)
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
 
-        if( provide_date <= date1 && ( target.remove_data == null || target.remove_date >= date1 ) )
+        if( provide_date <= date1 && ( target.remove_date == null || remove_date >= date1 ) )
         {
-        i=i+1;
-        txt = txt + 
+            i=i+1;
+            txt = txt + 
             `
             <tr>
-              <td name="results_table_real_id_` + i + `" style="display: none;">` + target.id + `</td>
-              <td name="results_table_id_` + i + `">` + i + `</td>
+              <td name="targets_table_real_id_` + i + `" style="display: none;">` + target.id + `</td>
+              <td name="targets_table_id_` + i + `">` + i + `</td>
               <td name="targets_table_decission_` + i + `">` + target.decission +`</td>
               <td name="targets_table_shortcut_` + i + `">` + target.shortcut + `</td>
               <td name="targets_table_scale_` + i + `">0-` + target.scale + `</td>
@@ -63,11 +63,12 @@ function show_targets(date)
 function changeDone(value, id)
 {
     var date = document.getElementById("date").value;
-    date = new Date(new Date(date).setHours(0)).getTime();
+    var date12 = new Date(date);
+    var date = date12.getTime();
     var res_id=-1;
     for(let result of results)
     {    
-        var res_date = new Date(new Date(result.date).setHours(0)).getTime();
+        var res_date = new Date(new Date(result.date).setHours(2)).getTime();
                 
         if(res_date == date)
         {
@@ -84,7 +85,7 @@ function changeDone(value, id)
         {
             for(let res of results)
             {
-                var res_date = new Date(new Date(res.date).setHours(0)).getTime();
+                var res_date = new Date(new Date(res.date).setHours(2)).getTime();
                 if(res_date == date)
                 {
                     res['target_id_'+id] = value;
@@ -122,7 +123,7 @@ function construct_results()
         txt = txt + 
             `
             <tr name="results_table_row_`+id+`" id="results_table_row_`+id+`">
-            <td name="results_table_row_`+id+`_real_id" id="results_table_row_"`+id+`_real_id" style="display: none;">` + id + `</td>
+            <td name="results_table_row_`+id+`_real_id" id="results_table_row_`+id+`_real_id" style="display: none;">` + id + `</td>
             <td name="results_table_row_`+id+`_id" id="results_table_row_`+id+`_id"></td>
             <td name="results_table_row_`+id+`_shortcut">`+target.shortcut+`</td>`;
 
@@ -278,3 +279,5 @@ function load()
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 };
+
+window.onload = load;
