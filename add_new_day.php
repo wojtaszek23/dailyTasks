@@ -12,11 +12,11 @@
   $tables = $connection->query(
 "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.tables WHERE TABLE_NAME LIKE '%_daily_task_%_results'");
 
-foreach($table as $tables)
+foreach($tables as $table)
 {
-  $connection->query("INSERT INTO `$table`() VALUES();");
+  $t = $table['TABLE_NAME'];
+  $connection->query("INSERT INTO `$t`() VALUES();");
 }
 
   $connection->close();
-
 ?>
