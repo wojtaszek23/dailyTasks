@@ -50,12 +50,12 @@ function daily_task_edit_button_clicked(nr)
     }
     $.get(url, dataToSend)
     .done(res => {
-        if(res == "yes")
+        if(res != "no" && res != "exists in daily_task_"+nr)
         {
             alert("Isnieją już w Twoim panelu Codzienne Wyzwania o tej samej nazwie. Wybierz inną nazwę.")
             return;
         }
-        else if(res == "no")
+        else
         {
             var daily_task_name_field = $("#daily_task_"+nr+"_name_field");
             daily_task_name_field.val(daily_task_name);

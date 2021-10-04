@@ -34,7 +34,7 @@
   </div>
 
   <div id="date_panel_div">
-    <input type="date" id="date" onChange="date_changed()" value="<?php echo date('Y-m-d'); ?>" />
+    <input type="date" id="date" onChange="date_changed()" value="<?php echo date('Y-m-d');?>" />
   </div>
 
   <div id="results_div">

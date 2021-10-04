@@ -32,20 +32,39 @@
   }
 
   $nick = $_SESSION['nick_logged'];
-  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND
-  (`daily_task_1`='$name' OR `daily_task_2`='$name' OR `daily_task_3`='$name')
-  ");
   
-  $connection->close();
-
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND
+  `daily_task_1`='$name';");
+  
   if($result->num_rows > 0)
   {
-      echo "yes";
-      exit();
+    $connection->close();
+    echo "exists in daily_task_1";
+    exit();  
   }
-  else
+  
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND
+  `daily_task_2`='$name';");
+  
+  if($result->num_rows > 0)
   {
-      echo "no";
-      exit();
+    $connection->close();
+    echo "exists in daily_task_2";
+    exit();  
   }
+
+  $result = $connection->query("SELECT * FROM `__users` WHERE `user`='$nick' AND
+  `daily_task_3`='$name';");
+  
+  if($result->num_rows > 0)
+  {
+    $connection->close();
+    echo "exists in daily_task_3";
+    exit();  
+  }
+
+  $connection->close();
+
+  echo "no";
+  exit();
 ?>
