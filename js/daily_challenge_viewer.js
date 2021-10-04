@@ -159,15 +159,15 @@ function construct_results()
 }
 
 function show_results(date1)
-{    
+{   
+    var date = new Date(new Date(date1).setHours(0)).getTime();
     var results_table = document.getElementById("results_table");
     results_table.style.display = "none";
     var result_with_given_date_exsists = false;
-    var date12 = new Date(date1);
-    var date = date12.getTime();
+    
     for(let result of results)
     {
-        var res_date = new Date(new Date(result.date).setHours(2)).getTime();   
+        var res_date = new Date(new Date(result.date).setHours(0)).getTime();   
         if(res_date == date)
         {
             results_table.style.display = "flex";
@@ -182,11 +182,11 @@ function show_results(date1)
 
     var i = 0;
     for(let target of targets){
-        var provide_date = new Date(new Date(target.provide_date).setHours(2)).getTime();
-        var remove_date = new Date(new Date(target.remove_date).setHours(2)).getTime();
+        var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
+        var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
         var id = target.id;
         
-        if( provide_date <= date && ( target.remove_date == null || target.remove_date > date ) )
+        if( provide_date <= date && ( target.remove_date == null || remove_date > date ) )
         {
             i=i+1;
             var row = document.getElementById("results_table_row_"+id);
@@ -196,7 +196,7 @@ function show_results(date1)
 
             for(let result of results)
             {    
-                var res_date = new Date(new Date(result.date).setHours(2)).getTime();
+                var res_date = new Date(new Date(result.date).setHours(0)).getTime();
 
                 if(res_date == date)
                 {
