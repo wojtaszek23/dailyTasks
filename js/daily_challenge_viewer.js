@@ -186,7 +186,7 @@ function show_results(date1)
         var remove_date = new Date(new Date(target.remove_date).setHours(2)).getTime();
         var id = target.id;
         
-        if( provide_date <= date && ( target.remove_date == null || target.remove_date >= date ) )
+        if( provide_date <= date && ( target.remove_date == null || target.remove_date > date ) )
         {
             i=i+1;
             var row = document.getElementById("results_table_row_"+id);

@@ -55,7 +55,7 @@ if(!empty($_GET))
     $id = $row['MAX(id)'];
   }
 
-  $connection->query("ALTER TABLE `$challange_name_results` ADD COLUMN `daily_task_$id` int(11) DEFAULT 0;");
+  $connection->query("ALTER TABLE `$challange_name_results` ADD COLUMN `target_id_$id` int(11) DEFAULT 0;");
 
   $connection->close();
   

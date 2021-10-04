@@ -56,9 +56,6 @@
 
     if($result->num_rows != 1)
     {
-      echo $result->num_rows;
-      echo $text;
-      exit();
         throw new Exception();
     }
   }

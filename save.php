@@ -33,14 +33,14 @@ if(!empty($_POST))
 
   $nr = $_SESSION['nr_of_daily_task'];
 
-  $kind = "target_id_".$nr;
+  $kind = "daily_task_".$nr;
 
   if($connection->connect_errno != 0)
   {
     throw new Exception(myslqi_connect_errno());
   }
 
-  $connection->query("UPDATE `__users` SET `$kind`='$daily_task_name' WHERE `user`='$nick'");
+  $connection->query("UPDATE `__users` SET `$kind`='$daily_task_name' WHERE `user`='$nick';");
 
   unset($_SESSION['creating_daily_task_name']);
   unset($_SESSION['nr_of_daily_task']);
