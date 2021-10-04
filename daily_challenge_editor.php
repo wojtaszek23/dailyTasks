@@ -68,6 +68,9 @@
     <a href="./logout.php">
       <input type="button" id="logout_button" value="Wylogowanie"></input>
     </a>
+    <a href="./main_panel.php">
+      <input type="button" id="logout_button" value="Powrót"></input>
+    </a>
   </div>
   
   <div style="clear:both"></div>

@@ -165,6 +165,9 @@
     <a href="./logout.php">
       <input type="button" id="logout_button" value="Wylogowanie"></input>
     </a>
+    <a href="./main_panel.php">
+      <input type="button" id="logout_button" value="Powrót"></input>
+    </a>
   </div>
   <div style="clear:both"></div>
   <h2 style="text-align: center;">Kreator Codziennych zadań "<?php echo $_SESSION['creating_daily_task_name']?>" 
