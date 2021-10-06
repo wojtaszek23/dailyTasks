@@ -38,6 +38,14 @@
       margin-right: 1%;
       margin-left: 1%;
     }
+    #specify_dates_table{
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 98%;
+      margin-top: 50px;
+      margin-right: 1%;
+      margin-left: 1%;
+    }
     th, td{
       border: 1px solid black;
     }
@@ -74,11 +82,26 @@
     function removeRowFromTable()
     {
       var table = document.getElementById("creating_tasks_table");
+      var table2 = document.getElementById("specify_dates_table");
       if( table.rows.length > 1 )
       {
 	      var row = table.deleteRow(-1);
+        table2.deleteRow(-1);
 	      num_rows = num_rows - 1;
 	      document.getElementById('num_rows').value = num_rows;
+      }
+    }
+    function endingChanged(id)
+    {
+      if (document.getElementById('ending' + id).checked) 
+      {
+        document.getElementById('valid_until' + id).disabled = false;
+        document.getElementById('valid_until' + id).valueAsDate = new Date();
+      }
+      else 
+      {
+        document.getElementById('valid_until' + id).disabled = true;
+        document.getElementById('valid_until' + id).value = null;
       }
     }
     function changeScale(id)
@@ -154,7 +177,34 @@
       {
 	      cellStatus[i].innerHTML = '<input text id="done' + i + "_" + id + '" name="done' + i + "_" + id +  '" style="box-sizing: border-box; width: 100%;" disabled/>';
       }
-      
+
+      var table2 = document.getElementById("specify_dates_table");
+      var row2 = table2.insertRow(-1);
+      var cellID2 = row2.insertCell(0);
+      var valid_since = row2.insertCell(1);
+      var valid_until = row2.insertCell(2);
+      var ending = row2.insertCell(3);
+      var mon = row2.insertCell(4);
+      var tue = row2.insertCell(5);
+      var wed = row2.insertCell(6);
+      var thu = row2.insertCell(7);
+      var fri = row2.insertCell(8);
+      var sut = row2.insertCell(9);
+      var sun = row2.insertCell(10);
+      cellID2.innerHTML = id;
+      cellID2.size = "3%";
+      valid_since.innerHTML = '<input type="date" id="valid_since' + id + '" name="valid_since' + id + '" style="box-sizing: border-box; width: 100%;" />';
+      valid_until.innerHTML = '<input type="date" id="valid_until' + id + '" name="valid_until' + id + '" style="box-sizing: border-box; width: 100%;" disabled />';
+      ending.innerHTML = '<input type="checkbox" id="ending' + id + '" name="ending' + id + '" style="box-sizing: border-box; width: 100%;" onclick="endingChanged(' + id + ')" />';
+      mon.innerHTML = '<input type="checkbox" id="mon' + id + '" name="mon' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      tue.innerHTML = '<input type="checkbox" id="tue' + id + '" name="tue' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      wed.innerHTML = '<input type="checkbox" id="wed' + id + '" name="wed' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      thu.innerHTML = '<input type="checkbox" id="thu' + id + '" name="thu' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      fri.innerHTML = '<input type="checkbox" id="fri' + id + '" name="fri' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      sut.innerHTML = '<input type="checkbox" id="sat' + id + '" name="sat' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      sun.innerHTML = '<input type="checkbox" id="sun' + id + '" name="sun' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
+      document.getElementById('valid_since' + id).valueAsDate = new Date();
+
       num_rows = num_rows + 1;
       document.getElementById('num_rows').value = num_rows;
     }
@@ -172,7 +222,7 @@
   <div style="clear:both"></div>
   <h2 style="text-align: center;">Kreator Codziennych zadań "<?php echo $_SESSION['creating_daily_task_name']?>" 
   użytkownika <?php echo $_SESSION['nick_logged']?></h2>
-  <form id="daily_tasks_form" action="./save.php" method="post">
+  <form id="daily_tasks_form" action="./save.php" method="post" enctype='multipart/form-data'>
     <table id="creating_tasks_table" name="creating_tasks_table">
       <tr>
         <th style="width: 3%;">ID</th>
@@ -189,6 +239,25 @@
     </table>
     <button type="button" id="add_row_button" onclick="addRowToTable()">+</button>
     <button type="button" id="remove_row_button" onclick="removeRowFromTable()">-</button>
+    <div style="clear:both;"></div>
+    <table id="specify_dates_table" name="specify_dates_table">
+      <tr>
+        <th style="width: 3%;" rowspan="2">ID</th>
+        <th style="width: 9%;" rowspan="2">WAŻNE OD</th>
+        <th style="width: 9%;" rowspan="2">WAŻNE DO</th>
+        <th style="width: 2%; min-width: 1.5em;" rowspan="2">?</th>
+        <th style="77%;" colspan="7">WAŻNE W DNI TYGODNIA</th>
+      </tr>
+      <tr>
+        <th style="width: 10%;">PONIEDZIAŁEK</th>
+        <th style="width: 10%;">WTOREK</th>
+        <th style="width: 10%;">ŚRODA</th>
+        <th style="width: 10%;">CZWARTEK</th>
+        <th style="width: 10%;">PIĄTEK</th>
+        <th style="width: 10%;">SOBOTA</th>
+        <th style="width: 10%;">NIEDZIELA</th>
+      </tr>
+    </table>
     <input type="submit" id="ok_button" value="ZAPIS"></input>
     <input type="hidden" name="num_rows" id="num_rows" value='0'/>
   </form>

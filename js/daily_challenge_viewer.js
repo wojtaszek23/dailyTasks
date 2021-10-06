@@ -1,6 +1,16 @@
 var targets = [];
 var results = [];
 
+function validate_day_of_week(target)
+{
+    var date = new Date(document.getElementById('date').value);
+    var dayOfWeek = date.getDay();
+    return (dayOfWeek == 0 && target.sun == 1) ||
+        (dayOfWeek == 1 && target.mon == 1) || (dayOfWeek == 2 && target.tue == 1) ||
+        (dayOfWeek == 3 && target.wed == 1) || (dayOfWeek == 4 && target.thu == 1) ||
+        (dayOfWeek == 5 && target.fri == 1) || (dayOfWeek == 6 && target.sat == 1);
+}
+
 function date_changed()
 {
     var date = document.getElementById("date").value;
@@ -30,6 +40,9 @@ function show_targets(date)
 
     var i = 0;
     for(let target of targets){
+
+        if ( validate_day_of_week(target) == false ) continue;
+
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
 
@@ -117,6 +130,8 @@ function construct_results()
 
     for(let target of targets)
     {   
+        if ( validate_day_of_week(target) == false ) continue;
+
         var id = target.id;
         var radio_name = `results_table_radio_row_` + id;
         var radio_button = `<input type="radio" style="cursor: pointer;" name="` + radio_name + `" id="` + radio_name + `_done`;
@@ -182,10 +197,12 @@ function show_results(date1)
 
     var i = 0;
     for(let target of targets){
+        if ( validate_day_of_week(target) == false ) continue;
+        
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
         var id = target.id;
-        
+
         if( provide_date <= date && ( target.remove_date == null || remove_date > date ) )
         {
             i=i+1;
@@ -228,6 +245,8 @@ function show_statistics()
     
     for(let target of targets)
     {
+        if ( validate_day_of_week(target) == false ) continue;
+
         var id = target.id;
         var scale = target.scale;
         var provide_date = new Date(target.provide_date).getTime();

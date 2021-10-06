@@ -57,7 +57,14 @@ if(!empty($_POST))
     `done4` text NOT NULL,
     `done5` text NOT NULL,
     `provide_date` date NOT NULL DEFAULT current_timestamp(),
-    `remove_date` date DEFAULT NULL
+    `remove_date` date DEFAULT NULL,
+    `mon` tinyint(1) NOT NULL DEFAULT 1,
+    `tue` tinyint(1) NOT NULL DEFAULT 1,
+    `wed` tinyint(1) NOT NULL DEFAULT 1,
+    `thu` tinyint(1) NOT NULL DEFAULT 1,
+    `fri` tinyint(1) NOT NULL DEFAULT 1,
+    `sat` tinyint(1) NOT NULL DEFAULT 1,
+    `sun` tinyint(1) NOT NULL DEFAULT 1
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
   
   $connection->query("ALTER TABLE `$challange_name`
@@ -77,8 +84,53 @@ if(!empty($_POST))
     $done3 = $_POST['done3_'.$i];
     $done4 = $_POST['done4_'.$i];
     $done5 = $_POST['done5_'.$i];
-    $connection->query("INSERT INTO `$challange_name` (`decission`, `shortcut`, `scale`, `done0`, `done1`, `done2`, `done3`, `done4`, `done5`) VALUES
-('$decission', '$shortcut', $scale, '$done0', '$done1', '$done2', '$done3', '$done4', '$done5');");
+    $mon = 0;
+    $tue = 0;
+    $wed = 0;
+    $thu = 0;
+    $fri = 0;
+    $sat = 0;
+    $sun = 0;
+    
+    if($_POST['mon'.$i] == 'on') $mon = 1;
+    if($_POST['tue'.$i] == 'on') $tue = 1;
+    if($_POST['wed'.$i] == 'on') $wed = 1;
+    if($_POST['thu'.$i] == 'on') $thu = 1;
+    if($_POST['fri'.$i] == 'on') $fri = 1;
+    if($_POST['sat'.$i] == 'on') $sat = 1;
+    if($_POST['sun'.$i] == 'on') $sun = 1;
+    
+    $ending = 0;
+
+    if($_POST['ending'.$i] == 'on') $ending = 1;
+
+    $valid_since = $_POST['valid_since'.$i];
+    
+    if($ending == 1)
+    {
+      $valid_until = $_POST['valid_until'.$i];
+    }
+    else
+    {
+      $valid_until = null;
+    }
+
+    if($valid_until != null)
+    {
+      $connection->query
+        ("INSERT INTO `$challange_name` 
+      (`decission`, `shortcut`, `scale`, `done0`, `done1`, `done2`, `done3`, `done4`, `done5`, `provide_date`, `remove_date`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) 
+        VALUES
+      ('$decission', '$shortcut', '$scale', '$done0', '$done1', '$done2', '$done3', '$done4', '$done5', '$valid_since', '$valid_until', '$mon', '$tue', '$wed', '$thu', '$fri', '$sat', '$sun');");
+    }
+    else
+    {
+      $connection->query
+        ("INSERT INTO `$challange_name` 
+      (`decission`, `shortcut`, `scale`, `done0`, `done1`, `done2`, `done3`, `done4`, `done5`, `provide_date`, `remove_date`, `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) 
+        VALUES
+      ('$decission', '$shortcut', '$scale', '$done0', '$done1', '$done2', '$done3', '$done4', '$done5', '$valid_since', NULL, '$mon', '$tue', '$wed', '$thu', '$fri', '$sat', '$sun');");
+    }
   }
 
   $creating_results_string = "CREATE TABLE `$challange_name_results` (
