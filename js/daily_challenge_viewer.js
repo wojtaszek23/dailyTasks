@@ -11,6 +11,16 @@ function validate_day_of_week(target)
         (dayOfWeek == 5 && target.fri == 1) || (dayOfWeek == 6 && target.sat == 1);
 }
 
+function validate_day_of_week2(target, date)
+{
+    var date1 = new Date(date);
+    var dayOfWeek = date1.getDay();
+    return (dayOfWeek == 0 && target.sun == 1) ||
+        (dayOfWeek == 1 && target.mon == 1) || (dayOfWeek == 2 && target.tue == 1) ||
+        (dayOfWeek == 3 && target.wed == 1) || (dayOfWeek == 4 && target.thu == 1) ||
+        (dayOfWeek == 5 && target.fri == 1) || (dayOfWeek == 6 && target.sat == 1);
+}
+
 function date_changed()
 {
     var date = document.getElementById("date").value;
@@ -129,9 +139,7 @@ function construct_results()
         </tr>`;
 
     for(let target of targets)
-    {   
-        if ( validate_day_of_week(target) == false ) continue;
-
+    { 
         var id = target.id;
         var radio_name = `results_table_radio_row_` + id;
         var radio_button = `<input type="radio" style="cursor: pointer;" name="` + radio_name + `" id="` + radio_name + `_done`;
@@ -197,13 +205,14 @@ function show_results(date1)
 
     var i = 0;
     for(let target of targets){
-        if ( validate_day_of_week(target) == false ) continue;
+        let flag = true;
+        if ( validate_day_of_week(target) == false ) flag = false;
         
         var provide_date = new Date(new Date(target.provide_date).setHours(0)).getTime();
         var remove_date = new Date(new Date(target.remove_date).setHours(0)).getTime();
         var id = target.id;
 
-        if( provide_date <= date && ( target.remove_date == null || remove_date > date ) )
+        if( provide_date <= date && ( target.remove_date == null || remove_date > date ) && flag )
         {
             i=i+1;
             var row = document.getElementById("results_table_row_"+id);
@@ -239,14 +248,14 @@ function show_results(date1)
 
 function show_statistics()
 {
-    var abc = document.getElementById("statistics_div");
+    var statistics_span = document.getElementById("statistics_span");
     var i = 0;
-    var percent = [];
+    var fraction = [];
+    var dates = [];
+    var dupa =[];
     
     for(let target of targets)
     {
-        if ( validate_day_of_week(target) == false ) continue;
-
         var id = target.id;
         var scale = target.scale;
         var provide_date = new Date(target.provide_date).getTime();
@@ -255,23 +264,117 @@ function show_statistics()
         for(let result of results)
         {
             var result_date = new Date(result.date).getTime();
+
+            if ( validate_day_of_week2(target, result.date) == false ) continue;
             
             if(result_date >= provide_date && (result_date < remove_date || remove_date == 0))
             {
-                if(scale!=0) percent[i] = result['target_id_'+id] / scale;
+                dates[i] = result_date;
+                if(scale!=0) fraction[i] = result['target_id_'+id] / scale;
                 i=i+1;
             }
         }
     }
     var sum=0;
     
-    for(let element of percent)
+    for(let element of fraction)
     {
         if(element!=undefined) sum = sum + element;
     }
     
-    sum = 100* sum / percent.length;
-    abc.innerHTML = "Całościowy dotychczasowy stopień realizacji zadań: " + Math.floor(sum) +"%";
+    sum = 100* sum / fraction.length;
+    statistics_span.innerHTML = "Całościowy uśredniony dotychczasowy stopień realizacji zadań: " + Math.floor(sum) +"%";
+
+    var usedDates = [];
+    var chartData = [];
+
+    for(let i=0; i < fraction.length; i++)
+    {
+        if(usedDates[dates[i]])
+        {
+            usedDates[dates[i]]++;
+        }
+        else
+        {
+            usedDates[dates[i]] = 1;
+        }
+    }
+
+    for(let i=0; i < fraction.length; i++)
+    {
+        if(chartData[dates[i]] == null)
+        {
+            chartData[dates[i]] = new Array();
+        }
+        chartData[dates[i]].push(fraction[i]);
+    }
+    var j = 0;
+
+    var fraction2 = [];
+    dates.sort();
+    var dates2 = [];
+
+    for(let i = 0; i < dates.length; i++)
+    {
+        var flag = true;
+        for(let k = i; k > 0; k--)
+        {
+            if(dates2[k] == dates[i])
+            {
+                flag = false;
+                break;
+            }
+        }
+        if(flag)
+        {
+            dates2[j] = dates[i];
+            j++;
+        }
+    }
+
+    j = 0;
+
+    for(let i = 0; i < dates2.length; i++)
+    {
+        fraction2[j] = 0;
+        for(let k = 0; k < chartData[dates2[i]].length; k++)
+        {
+            fraction2[j] = fraction2[j] + chartData[dates2[i]][k];      
+        }
+        fraction2[j] = fraction2[j] * 100 / chartData[dates2[i]].length;
+        j++;
+    }
+
+    var dates3 = [];
+
+    for(let i = 0; i < dates2.length; i++)
+    {
+        dates3[i] = new Date(dates2[i]).toLocaleDateString();
+    }
+
+    var ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: dates3,
+          datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(139,69,19,1.0)",
+            borderColor: "rgba(139,69,19,0.1)",
+            data: fraction2
+          }]
+        },
+        options: {
+          legend: {display: false},
+          scales: {
+            yAxes: [{ticks: {min: 0, max:100, callback: function(value, index, values) {
+                return value + '%';
+            }}}],
+          }
+        }
+      });
 };
 
 function load()

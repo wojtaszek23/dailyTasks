@@ -26,7 +26,7 @@ html,body
 #statistics_div{
   margin-top: 0%;
   margin-bottom: 0%;
-  height: 10%;
+  height: 15%;
   box-sizing: border-box;
   overflow-y: scroll;
   border: 2px outset saddlebrown;
@@ -35,7 +35,7 @@ html,body
 
 #targets_div{
   margin-top: 4%;
-  height: 30%;
+  height: 25%;
   box-sizing: border-box;
   overflow-y: scroll;
   border: 2px outset saddlebrown;

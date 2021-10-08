@@ -20,6 +20,7 @@
   <title>Daily Challenge Viewer</title>
   <link rel="stylesheet" href="./css/daily_challenge_viewer.css" type="text/css" />
   <script type="text/javascript" src="./js/daily_challenge_viewer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 </head>
 <body>
@@ -43,6 +44,8 @@
   </div>
 
   <div id="statistics_div">
+    <span id="statistics_span"></span>
+    <canvas id="myChart" style="width:100%; height: 100px;"></canvas>
   </div>
 
   <div id="targets_div">
