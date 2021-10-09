@@ -60,6 +60,46 @@
       padding: 0;
       box-sizing: border-box;
     }
+
+    /* Entire modal implementation taken from w3schools.com */ 
+    .modal {
+  display: none; /* Hidden by default */
+  position: absolute; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 50px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  box-sizing: border-box;
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+  /* Modal Content */
+  .modal-content {
+    background-color: #eeee77;
+    margin: auto;
+    overflow: auto;
+    padding-bottom: 10px;
+    border: 1px solid #888;
+    width: 90%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
   </style>
 </head>
 <body onload="loadTable()">
@@ -117,7 +157,7 @@
           <th style="display:none;"></th>
         </tr>
         <tr>
-          <td style="width: 4%;"><input type="button" style="width: 100%;" onclick="addDailyTaskRow()" value="Dodaj"></input></td>
+          <td style="width: 4%;"><input type="button" style="width: 100%;" onclick="addRowClicked()" value="Dodaj"></input></td>
           <td style="width: 4%;"><input type="number" style="width: 100%;" disabled></input></td>
           <td style="width: 20%;"><input type="text" style="width: 100%;"></input></td>
           <td style="width: 10%;"><input type="text" style="width: 100%;"></input></td>
@@ -146,5 +186,48 @@
         </tr>
       </table>
     </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close" onclick="xClicked()">&times;</span>
+    <div style="clear:both;"></div>
+    <table id="specify_dates_table" name="specify_dates_table">
+      <tr>
+        <th style="width: 10%;" rowspan="2">WAŻNE OD</th>
+        <th style="width: 10%;" rowspan="2">WAŻNE DO</th>
+        <th style="width: 3%; min-width: 1.5em;" rowspan="2">?</th>
+        <th style="77%;" colspan="7">WAŻNE W DNI TYGODNIA</th>
+      </tr>
+      <tr>
+        <th style="width: 10%;">PONIEDZIAŁEK</th>
+        <th style="width: 10%;">WTOREK</th>
+        <th style="width: 10%;">ŚRODA</th>
+        <th style="width: 10%;">CZWARTEK</th>
+        <th style="width: 10%;">PIĄTEK</th>
+        <th style="width: 10%;">SOBOTA</th>
+        <th style="width: 10%;">NIEDZIELA</th>
+      </tr>
+      <tr>
+        <td><input type="date" name="valid_since" id="valid_since" value="<?php echo date('Y-m-d');?>"></input></td>
+        <td><input type="date" name="valid_until" id="valid_until" disabled></input></td>
+        <td><input type="checkbox" name="ending" id="ending" onclick="endingChanged()"></input></td>
+        <td><input type="checkbox" name="mon" id="mon" checked></input></td>
+        <td><input type="checkbox" name="tue" id="tue" checked></input></td>
+        <td><input type="checkbox" name="wed" id="wed" checked></input></td>
+        <td><input type="checkbox" name="thu" id="thu" checked></input></td>
+        <td><input type="checkbox" name="fri" id="fri" checked></input></td>
+        <td><input type="checkbox" name="sat" id="sat" checked></input></td>
+        <td><input type="checkbox" name="sun" id="sun" checked></input></td>
+      </tr>
+    </table>
+    <div style="clear:both;"></div>
+    <input type="button" style="float:right; margin-top: 10px;" value="Zatwierdź" onclick="addDailyTaskRow()" />
+    <div style="clear:both;"></div>
+  </div>
+</div>
+
 </body>
 </html>

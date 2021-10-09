@@ -61,6 +61,44 @@ function loadTable()
     xmlhttp.send();
 }
 
+function xClicked()
+{
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
+function endingChanged()
+{
+  var valid_until = document.getElementById('valid_until');
+  var endingValue = document.getElementById('ending').checked;
+  if(endingValue)
+  {
+    valid_until.disabled = false;
+    valid_until.valueAsDate = new Date();
+  }
+  else
+  {
+    valid_until.disabled = true;
+    valid_until.value = null;
+  }
+}
+
+function addRowClicked()
+{
+  document.getElementById("valid_since").valueAsDate = new Date();
+  document.getElementById("valid_until").value = null;
+  document.getElementById("ending").checked = false;
+  document.getElementById("mon").checked = true;
+  document.getElementById("tue").checked = true;
+  document.getElementById("wed").checked = true;
+  document.getElementById("thu").checked = true;
+  document.getElementById("fri").checked = true;
+  document.getElementById("sat").checked = true;
+  document.getElementById("sun").checked = true;
+  var modal = document.getElementById("myModal");
+  modal.style.display = "block";
+}
+
 function addDailyTaskRow()
 {
     var xmlhttp = new XMLHttpRequest();
@@ -80,6 +118,23 @@ function addDailyTaskRow()
     var done3 = cells[8].children[0].value;
     var done4 = cells[9].children[0].value;
     var done5 = cells[10].children[0].value;
+    var valid_since = document.getElementById("valid_since").value;
+    var valid_until;
+    if(document.getElementById("ending").checked)
+    {
+      valid_until = document.getElementById("valid_until").value;
+    }
+    else
+    {
+      valid_until = '';
+    }
+    var mon = document.getElementById("mon").checked;
+    var tue = document.getElementById("tue").checked;
+    var wed = document.getElementById("wed").checked;
+    var thu = document.getElementById("thu").checked;
+    var fri = document.getElementById("fri").checked;
+    var sat = document.getElementById("sat").checked;
+    var sun = document.getElementById("sun").checked;
 
     xmlhttp.onreadystatechange = function()
     {
@@ -108,8 +163,14 @@ function addDailyTaskRow()
         }
     };
 
-    xmlhttp.open("GET", url+"?decission="+decission+"&shortcut="+shortcut+"&scale="+scale+"&done0="+done0+"&done1="+done1+"&done2="+done2+"&done3="+done3+"&done4="+done4+"&done5="+done5, true);
+    xmlhttp.open("GET", url+"?decission="+decission+"&shortcut="+shortcut+"&scale="+scale+
+    "&done0="+done0+"&done1="+done1+"&done2="+done2+"&done3="+done3+"&done4="+done4+
+    "&done5="+done5+"&valid_since="+valid_since+"&valid_until="+valid_until+"&mon="+mon+
+    "&tue="+tue+"&wed="+wed+"&thu="+thu+"&fri="+fri+"&sat="+sat+"&sun="+sun, true);
+
     xmlhttp.send();
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
 }
 
 function deleteDailyTaskRow()

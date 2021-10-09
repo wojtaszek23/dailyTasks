@@ -45,8 +45,43 @@ if(!empty($_GET))
   $done3 = $_GET['done3'];
   $done4 = $_GET['done4'];
   $done5 = $_GET['done5'];
-  $connection->query("INSERT INTO `$challange_name` (`decission`, `shortcut`, `scale`, `done0`, `done1`, `done2`, `done3`, `done4`, `done5`) VALUES
-('$decission', '$shortcut', $scale, '$done0', '$done1', '$done2', '$done3', '$done4', '$done5');");
+  $valid_since = $_GET['valid_since'];
+  $valid_until = $_GET['valid_until'];
+  $mon = 0;
+  $tue = 0;
+  $wed = 0;
+  $thu = 0;
+  $fri = 0;
+  $sat = 0;
+  $sun = 0;
+  
+  if($_GET['mon'] == true) $mon = 1;
+  if($_GET['tue'] == true) $tue = 1;
+  if($_GET['wed'] == true) $wed = 1;
+  if($_GET['thu'] == true) $thu = 1;
+  if($_GET['fri'] == true) $fri = 1;
+  if($_GET['sat'] == true) $sat = 1;
+  if($_GET['sun'] == true) $sun = 1;
+
+  if($valid_until == '')
+  {
+    $connection->query("INSERT INTO `$challange_name` (`decission`, `shortcut`, `scale`, 
+  `done0`, `done1`, `done2`, `done3`, `done4`, `done5`, `provide_date`, `remove_date`,
+  `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) VALUES
+  ('$decission', '$shortcut', '$scale', '$done0', '$done1', '$done2', '$done3', '$done4', '$done5',
+  '$valid_since', NULL, '$mon', '$tue', '$wed', '$thu', '$fri', '$sat', '$sun');");
+  }
+  
+  else
+  {
+    $connection->query("INSERT INTO `$challange_name` (`decission`, `shortcut`, `scale`, 
+  `done0`, `done1`, `done2`, `done3`, `done4`, `done5`, `provide_date`, `remove_date`,
+  `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun`) VALUES
+  ('$decission', '$shortcut', '$scale', '$done0', '$done1', '$done2', '$done3', '$done4', '$done5',
+  '$valid_since', '$valid_until', '$mon', '$tue', '$wed', '$thu', '$fri', '$sat', '$sun');");
+  }
+
+  
 
   $result = $connection->query("SELECT MAX(id) FROM `$challange_name`;");
   

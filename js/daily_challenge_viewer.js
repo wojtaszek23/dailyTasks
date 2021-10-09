@@ -1,6 +1,15 @@
 var targets = [];
 var results = [];
 
+function add_day(add)
+{
+    var date = new Date(document.getElementById('date').value);
+    date = date.setDate(date.getDate() + add);
+    var date = moment(date).format('YYYY-MM-DD');  
+    document.getElementById('date').value = date;
+    date_changed();
+}
+
 function validate_day_of_week(target)
 {
     var date = new Date(document.getElementById('date').value);
