@@ -79,6 +79,17 @@
     function saveDailyTasks()
     {
     }
+
+    function convertDateToInputFormat(date)
+    {
+      var month = date.getMonth() + 1;
+      if(month < 10)
+      {
+        month = '0'+month;
+      }
+      return date.getFullYear()+'-'+month+'-'+date.getDate();
+    }
+
     function removeRowFromTable()
     {
       var table = document.getElementById("creating_tasks_table");
@@ -91,12 +102,26 @@
 	      document.getElementById('num_rows').value = num_rows;
       }
     }
+    function changeEndingIfGreaterThanValidSince(id)
+    {
+      if (document.getElementById('ending' + id).checked)
+      {
+        var valid_since = document.getElementById('valid_since' + id);
+        var valid_until = document.getElementById('valid_until' + id);
+        if(valid_since.value > valid_until.value)
+        {
+          valid_until.value = valid_since.value;
+        }
+      }
+    }
     function endingChanged(id)
     {
       if (document.getElementById('ending' + id).checked) 
       {
         document.getElementById('valid_until' + id).disabled = false;
-        document.getElementById('valid_until' + id).valueAsDate = new Date();
+        var date_value = document.getElementById('valid_since' + id).value;
+        document.getElementById('valid_until' + id).min = date_value;
+        document.getElementById('valid_until' + id).value = date_value;
       }
       else 
       {
@@ -193,7 +218,8 @@
       var sun = row2.insertCell(10);
       cellID2.innerHTML = id;
       cellID2.size = "3%";
-      valid_since.innerHTML = '<input type="date" id="valid_since' + id + '" name="valid_since' + id + '" style="box-sizing: border-box; width: 100%;" />';
+      var today =  new Date();
+      valid_since.innerHTML = '<input type="date" id="valid_since' + id + '" name="valid_since' + id + '" style="box-sizing: border-box; width: 100%;" min="'+convertDateToInputFormat(today)+'" onchange="changeEndingIfGreaterThanValidSince(' + id + ')"/>';
       valid_until.innerHTML = '<input type="date" id="valid_until' + id + '" name="valid_until' + id + '" style="box-sizing: border-box; width: 100%;" disabled />';
       ending.innerHTML = '<input type="checkbox" id="ending' + id + '" name="ending' + id + '" style="box-sizing: border-box; width: 100%;" onclick="endingChanged(' + id + ')" />';
       mon.innerHTML = '<input type="checkbox" id="mon' + id + '" name="mon' + id + '" style="box-sizing: border-box; width: 100%;" checked />';
